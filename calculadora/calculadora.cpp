@@ -16,6 +16,13 @@ void division(float num, float num1);
 void potencia(float base, float exponente);
 void raiz(float indice, float radicando);
 
+//Opcion 2
+void vector ();
+void suma_vect(int vector, int n);
+void resta_vect(int vector, int n);
+void multi_esc_vect(int vector, int n);
+void prod_escalar(int vector, int n);
+void prod_vectorial(int vector, int n);
 
 
 int main(){
@@ -38,7 +45,7 @@ int main(){
 			break;
 			
 			case 2:
-				printf("\n\nHola mundo.\n\n");
+				vector ();
 			break;
 			
 			case 3:
@@ -223,3 +230,54 @@ void raiz(float radical, float indice){
 	float resultado = pow(radical, (1 / indice));
 	printf("\nLa raiz %f de %f es igual a: %f", radical, indice, resultado);
 }
+
+// Opcion 2
+
+void vector (){
+     do {
+         int opcion_vect = 0;
+         int n;
+         int vector [n];
+         printf ("ingrese la longitud del vector");
+         scanf ("%d", &n);
+         for (int i=0;i<n;i++){
+             printf ("ingrese la posicion %d del vector", i);
+             scanf ("%d", &vector [i]);
+         }
+         printf ("ingrese que accion quiere realizar con el vector");
+         scanf ("%d", &opcion_vect);
+         switch (opcion_vect){
+         case 1:
+              suma_vect(vector, n);
+              break;
+         
+         case 2:
+              resta_vect(vector, n);
+              break;
+         
+         case 3:
+              multi_esc_vect(vector, n);
+              break;
+         
+         case 4:
+              prod_escalar(vector, n);
+              break;
+         
+         case 5:
+              if (n == 3){
+                 prod_vectorial(vector, n);
+              }
+              else {
+                   printf ("no se puede hacer el producto vectorial porque no tiene 3 dimensiones");
+              }
+         break;
+         }
+     }while (opcion_vect !=0)     
+}
+void suma_vect(int vector, int n){
+
+}
+void resta_vect(int vector, int n){}
+void multi_esc_vect(int vector, int n){}
+void prod_escalar(int vector, int n){}
+void prod_vectorial(int vector, int n){}
