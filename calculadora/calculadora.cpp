@@ -18,11 +18,11 @@ void raiz(float indice, float radicando);
 
 //Opcion 2
 void vector ();
-void suma_vect(int vector, int n);
-void resta_vect(int vector, int n);
-void multi_esc_vect(int vector, int n);
-void prod_escalar(int vector, int n);
-void prod_vectorial(int vector, int n);
+void suma_vect(int* vector1, int* vector2, int n);
+void resta_vect(int* vector1, int* vector2, int n);
+void multi_esc_vect(int* vector1, int* vector2, int n);
+void prod_escalar(int* vector1, int* vector2, int n);
+void prod_vectorial(int* vector1, int* vector2, int n);
 
 
 int main(){
@@ -234,50 +234,72 @@ void raiz(float radical, float indice){
 // Opcion 2
 
 void vector (){
+    int opcion_vect = 0;
      do {
-         int opcion_vect = 0;
          int n;
-         int vector [n];
          printf ("ingrese la longitud del vector");
          scanf ("%d", &n);
+         int* vector1 = new int[n];
+         int* vector2 = new int[n];
          for (int i=0;i<n;i++){
-             printf ("ingrese la posicion %d del vector", i);
-             scanf ("%d", &vector [i]);
+             printf ("ingrese la posicion %d del vector 1", i);
+             scanf ("%d", &vector2 [i]);
+             printf ("ingrese la posicion %d del vector 2", i);
+             scanf ("%d", &vector2 [i]);
          }
-         printf ("ingrese que accion quiere realizar con el vector");
+         printf ("ingrese que accion quiere realizar con el vector: \n");
+         printf ("| opcion 1 = suma | \t");
+         printf ("| opcion 2 = resta | \t");
+         printf ("| opcion 3 = multiplicacion escalar | \n");
+         printf ("| opcion 4 = producto escalar | \t");
+         printf ("| opcion 5 = producto vectorial | \t");
+         printf ("\n");
          scanf ("%d", &opcion_vect);
          switch (opcion_vect){
+         case 0:
+            printf("saliendo del programa");
+            break;
+            
          case 1:
-              suma_vect(vector, n);
+              suma_vect(vector1, vector2, n);
               break;
          
          case 2:
-              resta_vect(vector, n);
+              resta_vect(vector1, vector2, n);
               break;
          
          case 3:
-              multi_esc_vect(vector, n);
+              multi_esc_vect(vector1, vector2, n);
               break;
          
          case 4:
-              prod_escalar(vector, n);
+              prod_escalar(vector1, vector2, n);
               break;
          
          case 5:
               if (n == 3){
-                 prod_vectorial(vector, n);
+                 prod_vectorial(vector1, vector2, n);
               }
               else {
                    printf ("no se puede hacer el producto vectorial porque no tiene 3 dimensiones");
               }
          break;
          }
-     }while (opcion_vect !=0)     
+     }while (opcion_vect !=0);     
 }
-void suma_vect(int vector, int n){
-
+void suma_vect(int* vector1, int* vector2, int n){
+    int posi_suma [n];
+    int total_suma = 0;
+    for (int i=0;i<n;i++){
+        posi_suma [i] = posi_suma [i] + vector1[i] + vector2[i];
+    }
+    for (int i=0;i<n;i++){
+        printf ("la suma de la posicion %d es: %d \n", i, posi_suma[i]);
+        total_suma = total_suma + posi_suma[i];
+    }
+    printf ("el resultado total de la suma es: %d", total_suma);
 }
-void resta_vect(int vector, int n){}
-void multi_esc_vect(int vector, int n){}
-void prod_escalar(int vector, int n){}
-void prod_vectorial(int vector, int n){}
+void resta_vect(int* vector1, int* vector2, int n){}
+void multi_esc_vect(int* vector1, int* vector2, int n){}
+void prod_escalar(int* vector1, int* vector2, int n){}
+void prod_vectorial(int* vector1, int* vector2, int n){}
