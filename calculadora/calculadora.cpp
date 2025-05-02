@@ -237,27 +237,37 @@ void vector (){
     int opcion_vect = 0;
      do {
          int n;
-         printf ("ingrese la longitud del vector");
+         printf ("\n\nIngrese la longitud del vector: ");
          scanf ("%d", &n);
          int* vector1 = new int[n];
          int* vector2 = new int[n];
+         
+         printf("\n\n");
          for (int i=0;i<n;i++){
-             printf ("ingrese la posicion %d del vector 1", i);
-             scanf ("%d", &vector2 [i]);
-             printf ("ingrese la posicion %d del vector 2", i);
-             scanf ("%d", &vector2 [i]);
+             printf ("Ingrese del vector 1 en la posicion %d: ", i);
+             scanf ("%d", &vector1[i]);
+             printf ("Ingrese del vector 2 en la posicion %d: ", i);
+             scanf ("%d", &vector2[i]);
+             printf("\n");
          }
-         printf ("ingrese que accion quiere realizar con el vector: \n");
+         
+         printf ("\n\nIngrese que accion quiere realizar con el vector: \n");
          printf ("| opcion 1 = suma | \t");
          printf ("| opcion 2 = resta | \t");
          printf ("| opcion 3 = multiplicacion escalar | \n");
          printf ("| opcion 4 = producto escalar | \t");
          printf ("| opcion 5 = producto vectorial | \t");
-         printf ("\n");
+         printf ("| opcion 0 = VOLVER AL MENU | \t\n");
+         printf ("\t> ");
          scanf ("%d", &opcion_vect);
+         while(opcion_vect < 0 || opcion_vect > 5){
+         	printf("\tOpcion no valida.\n\n\tPor favor ingrese de nuevo la opcion correspondiente: > ");
+		 	scanf ("%d", &opcion_vect);
+		 }
+         
          switch (opcion_vect){
          case 0:
-            printf("saliendo del programa");
+            printf("\n\nVolviendo al menu...\n\n");
             break;
             
          case 1:
@@ -291,13 +301,13 @@ void suma_vect(int* vector1, int* vector2, int n){
     int posi_suma [n];
     int total_suma = 0;
     for (int i=0;i<n;i++){
-        posi_suma [i] = posi_suma [i] + vector1[i] + vector2[i];
+        posi_suma [i] = vector1[i] + vector2[i];
     }
     for (int i=0;i<n;i++){
-        printf ("la suma de la posicion %d es: %d \n", i, posi_suma[i]);
+        printf ("\nLa suma de la posicion %d es: %d", i, posi_suma[i]);
         total_suma = total_suma + posi_suma[i];
     }
-    printf ("el resultado total de la suma es: %d", total_suma);
+    printf ("\n\nEl resultado total de la suma de todas las posiciones es de: %d", total_suma);
 }
 void resta_vect(int* vector1, int* vector2, int n){}
 void multi_esc_vect(int* vector1, int* vector2, int n){}
