@@ -19,10 +19,12 @@ void raiz(float indice, float radicando);
 //Opcion 3
 int ingresarOpciones3();
 void menuOpciones3(int opc);
-void ingresarMatrizAyB(int *F, int *C, int matrizA[10][10], int matrizB[10][10]);
+void ingresarFilasColumnas(int *F, int *C, int opc);
+void ingresarMatriz(int *F, int *C, float matrizA[10][10], float matrizB[10][10], int opc);
 //Operaciones
-void matrizSuma(int F, int C, int A[10][10], int B[10][10]);
-void matrizResta(int F, int C, int A[10][10], int B[10][10]);
+void matrizSuma(int F, int C, float A[10][10], float B[10][10]);
+void matrizResta(int F, int C, float A[10][10], float B[10][10]);
+void matrizPorEscalar(int F, int C, float A[10][10], float escalar);
 
 
 
@@ -236,26 +238,39 @@ void raiz(float radical, float indice){
 int ingresarOpciones3(){
 	int opcMenu3;
 	
-	printf("\n\n\tIngrese 1. Si quiere realizar operaciones como Suma y Resta de Matrices.");
-	printf("\n\n\tIngrese 2. Si quiere realizar Multiplicacion de un Escalar por una Matriz.");
-	printf("\n\n\tIngrese 3. Si quiere realizar Multiplicacion de Matrices.");
-	printf("\n\n\tIngrese 4. Si quiere realizar el Determinante de una Matriz.");
-	printf("\n\n\tIngrese 5. Si quiere realizar la Inversa de una Matriz.");
-	printf("\n\n\tIngrese 6. Si quiere realizar una Division entre dos Matrices.");	
-	printf("\n\n\n\tIngrese una opcion a elegir: > ");
-	scanf("%d", &opcMenu3);
-	while(opcMenu3 < 1 || opcMenu3 > 6){
-		printf("\n\tOpcion no valida.\n\n\tPor favor ingrese de nuevo la opcion correspondiente: > ");
+	do{	
+		printf("\n\n\tIngrese 1. Si quiere realizar operaciones como Suma y Resta de Matrices.");
+		printf("\n\n\tIngrese 2. Si quiere realizar Multiplicacion de un Escalar por una Matriz.");
+		printf("\n\n\tIngrese 3. Si quiere realizar Multiplicacion de Matrices.");
+		printf("\n\n\tIngrese 4. Si quiere realizar el Determinante de una Matriz.");
+		printf("\n\n\tIngrese 5. Si quiere realizar la Inversa de una Matriz.");
+		printf("\n\n\tIngrese 6. Si quiere realizar una Division entre dos Matrices.");
+		printf("\n\n\tIngrese 0. Para volver al Menu principal.");
+		printf("\n\n\n\tIngrese una opcion a elegir: > ");
 		scanf("%d", &opcMenu3);
-	}	
-	return opcMenu3;
+		while(opcMenu3 < 0 || opcMenu3 > 6){
+			printf("\n\tOpcion no valida.\n\n\tPor favor ingrese de nuevo la opcion correspondiente: > ");
+			scanf("%d", &opcMenu3);
+		}
+		
+		return opcMenu3;
+	
+	}while(opcMenu3 != 0);
+	
 }
 
 void menuOpciones3(int opc){
 	char opcLetra;
-	int filas, columnas, matrizA[10][10], matrizB[10][10];
+	int filas, columnas;
+	float matrizA[10][10], matrizB[10][10];
+	float escalar;
 	
 	switch(opc){
+		
+		case 0:
+			printf("\n------------------------------------\n\nVolviendo al menu...\n\n------------------------------------");
+		break;
+		
 		
 		case 1:
 			printf("\n\n\tIngrese S. Para realizar una Suma entre Matrices.\n");
@@ -269,7 +284,7 @@ void menuOpciones3(int opc){
 				scanf(" %c", &opcLetra);
 			}
 			
-			ingresarMatrizAyB(&filas, &columnas, matrizA, matrizB);
+			ingresarMatriz(&filas, &columnas, matrizA, matrizB, opc);
 			
 			switch(opcLetra){
 				case 'S':
@@ -282,7 +297,14 @@ void menuOpciones3(int opc){
 			}
 			
 		break;
+		
 		case 2:
+			ingresarMatriz(&filas, &columnas, matrizA, matrizB, opc);
+			printf("\n\nIngrese el valor de un Escalar para multiplicar a la matriz: ");
+			scanf("%f", &escalar);
+			
+			matrizPorEscalar(filas, columnas, matrizA, escalar);			
+			
 		break;
 		case 3:
 		break;
@@ -295,45 +317,68 @@ void menuOpciones3(int opc){
 	}
 }
 
-void ingresarMatrizAyB(int *F, int *C, int matrizA[10][10], int matrizB[10][10]){
+void ingresarMatriz(int *F, int *C, float matrizA[10][10], float matrizB[10][10], int opc){
 	int i, j;
 	
-	printf("\n\n\tIngrese la cantidad de filas: ");
-	scanf("%d", F);
-	while(*F < 1 || *F > 10){
-		printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
-		scanf("%d", F);
+	ingresarFilasColumnas(F, C, opc);
+	
+	if(opc == 1){
+		printf("\n\nIngrese los valores de la matriz A:\n");
+	
+		for(i=0; i < *F; i++){
+			for(j=0; j < *C; j++){
+				printf("\t\tA[%d][%d]: > ", i, j);
+				scanf("%f", &matrizA[i][j]);
+			}
+		}
+	
+ 		printf("\n\nIngrese los valores de la matriz B:\n");
+ 	
+ 		for(i=0; i < *F; i++){
+ 			for(j=0; j < *C; j++){
+ 				printf("\t\tB[%d][%d]: > ", i, j);
+ 				scanf("%f", &matrizB[i][j]);
+			 }
+		}
 	}
-	
-	printf("\tIngrese la cantidad de columnas: ");
-	scanf("%d", C);
-	while(*C < 1 || *C > 10){
-		printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
-		scanf("%d", C);
-	}
-	
-	printf("\n\n\tIngrese los valores de la matriz A:\n");
-	
-	for(i=0; i < *F; i++){
-		for(j=0; j < *C; j++){
-			printf("\t\tA[%d][%d]: > ", i, j);
-			scanf("%d", &matrizA[i][j]);
+	else if(opc == 2){
+		printf("\n\nIngrese los valores de la matriz:\n");
+		for(i=0; i < *F; i++){
+			for(j=0; j < *C; j++){
+				printf("\t\tA[%d][%d]: > ", i, j);
+				scanf("%f", &matrizA[i][j]);
+			}
 		}
 	}
 	
- 	printf("\n\n\tIngrese los valores de la matriz B:\n");
- 	
- 	for(i=0; i < *F; i++){
- 		for(j=0; j < *C; j++){
- 			printf("\t\tB[%d][%d]: > ", i, j);
- 			scanf("%d", &matrizB[i][j]);
-		 }
-	 }
+}
+	
+
+void ingresarFilasColumnas(int *F, int *C, int opc){
+	
+	if(opc == 1 || opc == 2){
 		
+		printf("\n\nIngrese la cantidad de filas: ");
+			scanf("%d", F);
+			while(*F < 1 || *F > 10){
+				printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
+				scanf("%d", F);
+			}
+	
+			printf("Ingrese la cantidad de columnas: ");
+			scanf("%d", C);
+			while(*C < 1 || *C > 10){
+				printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
+				scanf("%d", C);
+			}
+						
+	}
+	
 }
 
-void matrizSuma(int F, int C, int A[10][10], int B[10][10]){
-	int i, j, resultado[10][10];
+void matrizSuma(int F, int C, float A[10][10], float B[10][10]){
+	int i, j;
+	float resultado[10][10];
 	
 	for(i=0; i < F; i++){
 		for(j=0; j < C; j++){
@@ -341,18 +386,21 @@ void matrizSuma(int F, int C, int A[10][10], int B[10][10]){
 		}
 	}
 	
-	printf("\n\nLa Matriz Resultado de la Suma entre esas dos matrices es igual a:\n\n");
+//	printf("\n---------------------------------------"); ACORDATE AGREGAR ESTO JULIAN A TODOS LOS RESULTADOS PARA QUE QUEDE EL PROGRAMA MAS LEGIBLE DESDE LA CONSOLA.
+	printf("\n\nLa Matriz Resultante de la Suma entre esas dos matrices es igual a:\n\n");
 	
 	for(i=0; i < F; i++){
 		for(j=0; j < C; j++){
-			printf("|%d|", resultado[i][j]);
+			printf("|%.2f|", resultado[i][j]);
 		}
 		printf("\n");
 	}
+//	printf("\n---------------------------------------");
 }
 
-void matrizResta(int F, int C, int A[10][10], int B[10][10]){
-	int i, j, resultado[10][10];
+void matrizResta(int F, int C, float A[10][10], float B[10][10]){
+	int i, j;
+	float resultado[10][10];
 	
 	for(i=0; i < F; i++){
 		for(j=0; j < C; j++){
@@ -364,9 +412,29 @@ void matrizResta(int F, int C, int A[10][10], int B[10][10]){
 	
 	for(i=0; i < F; i++){
 		for(j=0; j < C; j++){
-			printf("|%d|", resultado[i][j]);
+			printf("|%.2f|", resultado[i][j]);
 		}
 		printf("\n");
 	}
 	
+}
+
+// Para multiplicar una matriz por un escalar es tan sencillo como que el usuario ingrese una sola matriz y luego a esa la multiplique por un escalar.
+void matrizPorEscalar(int F, int C, float A[10][10], float escalar){
+	int i, j;
+	float resultado[10][10];
+	
+	for(i=0; i < F; i++){
+		for(j=0; j < C; j++){
+			resultado[i][j] = A[i][j] * escalar;
+		}
+	}
+	
+	printf("\n\nLa Matriz resultante es igual a: \n\n");
+	for(i=0; i < F; i++){
+		for(j=0; j < C; j++){
+			printf("|%.2f|", resultado[i][j]);
+		}
+		printf("\n");
+	}
 }
