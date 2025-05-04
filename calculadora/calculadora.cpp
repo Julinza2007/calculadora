@@ -354,7 +354,7 @@ void prod_escalar(int* vector1, int* vector2, int n){
     for (int i=0;i<n;i++){
         producto_escalar[i]= vector1[i] * vector2[i];
     }
-    for (int i=0;i<n;i++){
+    for (int i=0;i<n;i++){ 
         res_prod_esc = res_prod_esc + producto_escalar[i];
     }
     printf ("El resultado total del producto escalar es: %d ", res_prod_esc);
@@ -364,54 +364,46 @@ void prod_vectorial(int* vector1, int* vector2, int n){}
 // opcion 4
 
 void obtenerCoeficientes() {
-     float a1, b1, c1, a2, b2 , c2; // coeficientes
-     float x, y; //las soluciones del sistema
-    printf("Ingrese los coeficientes para la primera ecuacion: \n");
-    while (scanf("%f %f %f", a1, b1, c1) != 3) {  
-        printf("Entrada inválida. Intente de nuevo: \n");
-        while (getchar() != '\n');
-    }
-
-    printf("Ingrese los coeficientes para la segunda ecuacion \n");
-    while (scanf("%f %f %f", a2, b2, c2) != 3) {  
-        printf("Entrada inválida. Intente de nuevo: \n");
-        while (getchar() != '\n');
-    }
-    int resultado = resolverSistema2x2(a1, b1, c1, a2, b2, c2, &x, &y);
-
-                if(resultado == 0){
-	            printf("Resultado \n");
-	            printf("X = %f \n", x);
-	            printf("Y = %f \n", y);
-	            }	            
-                else{
-	            printf("No se puede resolver \n");
-                }
-}
-
-int resolverSistema2x2(float a1, float b1, float c1, float a2, float b2, float c2, float *x, float *y){
-	if(a1 == 0){
-		printf("No se puede resolver porque a1 es 0 \n");
-		return 1;
+	
+	int opcion;
+	
+	printf("Ingrese 1 para resolver un sistema 2x2");
+	printf("Ingrese 2 para resolver un sistema 3x3");
+	scanf("%d", &opcion);
+	
+	while(opcion != 1 && opcion != 2){
+		printf("Opcion invalida. Ingrese 1 para 2x2 o 2 para 3x3");
+		scanf("%d", &opcion);
 	}
 	
 	
-	 float A = (-a2 * b1 / a1) + b2;  
-     float B = c2 - (a2 * c1 / a1);  
-    
-    
-    if (A == 0){
-    	printf("No se puede resolver el sistema porque el coficiente es 0. \n");
-    	return 1;
-	}
-	
-	*y = B / A;
-	
-	*x = (c1 -b1 * (*y)) / a1;
-	
-	
-	return 0;
-	
-	
+	 if (opcion == 1) {
+        float a1, b1, c1, a2, b2, c2; // coeficientes
+        float x, y; // soluciones
+
+        printf("\nIngrese los coeficientes para la primera ecuación (a1 b1 c1): ");
+        while (scanf("%f %f %f", &a1, &b1, &c1) != 3) {  
+            printf("Entrada inválida. Intente de nuevo: ");
+            while (getchar() != '\n');
+        }
+
+        printf("Ingrese los coeficientes para la segunda ecuación (a2 b2 c2): ");
+        while (scanf("%f %f %f", &a2, &b2, &c2) != 3) {  
+            printf("Entrada inválida. Intente de nuevo: ");
+            while (getchar() != '\n');
+        }
+
+        int resultado = resolverSistema2x2(a1, b1, c1, a2, b2, c2, &x, &y);
+        if (resultado == 0) {
+            printf("\nResultado:\n");
+            printf("X = %f\n", x);
+            printf("Y = %f\n", y);
+        } else {
+            printf("\nNo se puede resolver el sistema.\n");
+        }
+    } 
+	/*else if (opcion == 2) {
+	     ACA IRIA EL 3X3                      */
 	
 }
+
