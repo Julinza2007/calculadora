@@ -246,9 +246,11 @@ void vector (){
          for (int i=0;i<n;i++){
              printf ("Ingrese del vector 1 en la posicion %d: ", i);
              scanf ("%d", &vector1[i]);
+         }
+         printf("\n \n");
+         for (int i=0;i<n;i++){
              printf ("Ingrese del vector 2 en la posicion %d: ", i);
              scanf ("%d", &vector2[i]);
-             printf("\n");
          }
          
          printf ("\n\nIngrese que accion quiere realizar con el vector: \n");
@@ -309,7 +311,38 @@ void suma_vect(int* vector1, int* vector2, int n){
     }
     printf ("\n\nEl resultado total de la suma de todas las posiciones es de: %d", total_suma);
 }
-void resta_vect(int* vector1, int* vector2, int n){}
-void multi_esc_vect(int* vector1, int* vector2, int n){}
+void resta_vect(int* vector1, int* vector2, int n){
+    int posi_resta [n];
+    int total_resta = 0;
+    for (int i=0;i<n;i++){
+        posi_resta [i] = vector1[i] - vector2[i];
+    }
+    for (int i=0;i<n;i++){
+        printf ("\nLa suma de la posicion %d es: %d", i, posi_resta[i]);
+        if (i != n - 1)
+        total_resta = total_resta + (posi_resta[i] - posi_resta[i+ 1]);
+    }
+    printf ("\n\nEl resultado total de la suma de todas las posiciones es de: %d", total_resta);
+}
+void multi_esc_vect(int* vector1, int* vector2, int n){
+    int escalar = 1;
+    printf ("ingrese el escalar");
+    scanf ("%d", &escalar);
+    int resultado_escalar1[n];
+    int resultado_escalar2[n];
+    for (int i=0;i<n;i++){
+        resultado_escalar1[i] = vector1[i] * escalar;
+    }
+    for (int i=0;i<n;i++){
+        resultado_escalar2[i] = vector2[i] * escalar;
+    }
+    for (int i=0;i<n;i++){
+        printf ("La multiplicacion escalar del vector 1 en la posicion %d es igual a %d \t ", i, resultado_escalar1[i]);
+    }
+    printf ("\n");
+    for (int i=0;i<n;i++){
+        printf ("La multiplicacion escalar del vector 2 en la posicion %d es igual a %d \t ", i, resultado_escalar2[i]);
+    }
+}
 void prod_escalar(int* vector1, int* vector2, int n){}
 void prod_vectorial(int* vector1, int* vector2, int n){}
