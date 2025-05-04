@@ -25,6 +25,10 @@ void prod_escalar(int* vector1, int* vector2, int n);
 void prod_vectorial(int* vector1, int* vector2, int n);
 
 
+//opcion 4
+void obtenerCoeficientes();
+int resolverSistema2x2(float a1, float b1, float c1, float a2, float b2, float c2, float *x, float *y);
+
 int main(){
 	int opcionMenu, opcion1;
 	
@@ -53,7 +57,7 @@ int main(){
 			break;
 			
 			case 4:
-				printf("\n\nHola mundo.\n\n");
+			    obtenerCoeficientes();
 			break;
 			
 			case 0:
@@ -237,27 +241,39 @@ void vector (){
     int opcion_vect = 0;
      do {
          int n;
-         printf ("ingrese la longitud del vector");
+         printf ("\n\nIngrese la longitud del vector: ");
          scanf ("%d", &n);
          int* vector1 = new int[n];
          int* vector2 = new int[n];
+         
+         printf("\n\n");
          for (int i=0;i<n;i++){
-             printf ("ingrese la posicion %d del vector 1", i);
-             scanf ("%d", &vector2 [i]);
-             printf ("ingrese la posicion %d del vector 2", i);
-             scanf ("%d", &vector2 [i]);
+             printf ("Ingrese del vector 1 en la posicion %d: ", i);
+             scanf ("%d", &vector1[i]);
          }
-         printf ("ingrese que accion quiere realizar con el vector: \n");
+         printf("\n \n");
+         for (int i=0;i<n;i++){
+             printf ("Ingrese del vector 2 en la posicion %d: ", i);
+             scanf ("%d", &vector2[i]);
+         }
+         
+         printf ("\n\nIngrese que accion quiere realizar con el vector: \n");
          printf ("| opcion 1 = suma | \t");
          printf ("| opcion 2 = resta | \t");
          printf ("| opcion 3 = multiplicacion escalar | \n");
          printf ("| opcion 4 = producto escalar | \t");
          printf ("| opcion 5 = producto vectorial | \t");
-         printf ("\n");
+         printf ("| opcion 0 = VOLVER AL MENU | \t\n");
+         printf ("\t> ");
          scanf ("%d", &opcion_vect);
+         while(opcion_vect < 0 || opcion_vect > 5){
+         	printf("\tOpcion no valida.\n\n\tPor favor ingrese de nuevo la opcion correspondiente: > ");
+		 	scanf ("%d", &opcion_vect);
+		 }
+         
          switch (opcion_vect){
          case 0:
-            printf("saliendo del programa");
+            printf("\n\nVolviendo al menu...\n\n");
             break;
             
          case 1:
@@ -291,15 +307,111 @@ void suma_vect(int* vector1, int* vector2, int n){
     int posi_suma [n];
     int total_suma = 0;
     for (int i=0;i<n;i++){
-        posi_suma [i] = posi_suma [i] + vector1[i] + vector2[i];
+        posi_suma [i] = vector1[i] + vector2[i];
     }
     for (int i=0;i<n;i++){
-        printf ("la suma de la posicion %d es: %d \n", i, posi_suma[i]);
+        printf ("\nLa suma de la posicion %d es: %d", i, posi_suma[i]);
         total_suma = total_suma + posi_suma[i];
     }
-    printf ("el resultado total de la suma es: %d", total_suma);
+    printf ("\n\nEl resultado total de la suma de todas las posiciones es de: %d", total_suma);
 }
-void resta_vect(int* vector1, int* vector2, int n){}
-void multi_esc_vect(int* vector1, int* vector2, int n){}
-void prod_escalar(int* vector1, int* vector2, int n){}
+void resta_vect(int* vector1, int* vector2, int n){
+    int posi_resta [n];
+    int total_resta = 0;
+    for (int i=0;i<n;i++){
+        posi_resta [i] = vector1[i] - vector2[i];
+    }
+    for (int i=0;i<n;i++){
+        printf ("\nLa suma de la posicion %d es: %d", i, posi_resta[i]);
+        if (i != n - 1)
+        total_resta = total_resta + (posi_resta[i] - posi_resta[i+ 1]);
+    }
+    printf ("\n\nEl resultado total de la suma de todas las posiciones es de: %d", total_resta);
+}
+void multi_esc_vect(int* vector1, int* vector2, int n){
+    int escalar = 1;
+    printf ("ingrese el escalar");
+    scanf ("%d", &escalar);
+    int resultado_escalar1[n];
+    int resultado_escalar2[n];
+    for (int i=0;i<n;i++){
+        resultado_escalar1[i] = vector1[i] * escalar;
+    }
+    for (int i=0;i<n;i++){
+        resultado_escalar2[i] = vector2[i] * escalar;
+    }
+    for (int i=0;i<n;i++){
+        printf ("La multiplicacion escalar del vector 1 en la posicion %d es igual a %d \t ", i, resultado_escalar1[i]);
+    }
+    printf ("\n");
+    for (int i=0;i<n;i++){
+        printf ("La multiplicacion escalar del vector 2 en la posicion %d es igual a %d \t ", i, resultado_escalar2[i]);
+    }
+}
+void prod_escalar(int* vector1, int* vector2, int n){
+    int producto_escalar[n];
+    int res_prod_esc;
+    for (int i=0;i<n;i++){
+        producto_escalar[i]= vector1[i] * vector2[i];
+    }
+    for (int i=0;i<n;i++){
+        res_prod_esc = res_prod_esc + producto_escalar[i];
+    }
+    printf ("El resultado total del producto escalar es: %d ", res_prod_esc);
+}
 void prod_vectorial(int* vector1, int* vector2, int n){}
+
+// opcion 4
+
+void obtenerCoeficientes() {
+     float a1, b1, c1, a2, b2 , c2; // coeficientes
+     float x, y; //las soluciones del sistema
+    printf("Ingrese los coeficientes para la primera ecuacion: \n");
+    while (scanf("%f %f %f", a1, b1, c1) != 3) {  
+        printf("Entrada inválida. Intente de nuevo: \n");
+        while (getchar() != '\n');
+    }
+
+    printf("Ingrese los coeficientes para la segunda ecuacion \n");
+    while (scanf("%f %f %f", a2, b2, c2) != 3) {  
+        printf("Entrada inválida. Intente de nuevo: \n");
+        while (getchar() != '\n');
+    }
+    int resultado = resolverSistema2x2(a1, b1, c1, a2, b2, c2, &x, &y);
+
+                if(resultado == 0){
+	            printf("Resultado \n");
+	            printf("X = %f \n", x);
+	            printf("Y = %f \n", y);
+	            }	            
+                else{
+	            printf("No se puede resolver \n");
+                }
+}
+
+int resolverSistema2x2(float a1, float b1, float c1, float a2, float b2, float c2, float *x, float *y){
+	if(a1 == 0){
+		printf("No se puede resolver porque a1 es 0 \n");
+		return 1;
+	}
+	
+	
+	 float A = (-a2 * b1 / a1) + b2;  
+     float B = c2 - (a2 * c1 / a1);  
+    
+    
+    if (A == 0){
+    	printf("No se puede resolver el sistema porque el coficiente es 0. \n");
+    	return 1;
+	}
+	
+	*y = B / A;
+	
+	*x = (c1 -b1 * (*y)) / a1;
+	
+	
+	return 0;
+	
+	
+	
+}
