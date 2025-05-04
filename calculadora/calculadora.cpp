@@ -344,5 +344,15 @@ void multi_esc_vect(int* vector1, int* vector2, int n){
         printf ("La multiplicacion escalar del vector 2 en la posicion %d es igual a %d \t ", i, resultado_escalar2[i]);
     }
 }
-void prod_escalar(int* vector1, int* vector2, int n){}
+void prod_escalar(int* vector1, int* vector2, int n){
+    int producto_escalar[n];
+    int res_prod_esc;
+    for (int i=0;i<n;i++){
+        producto_escalar[i]= vector1[i] * vector2[i];
+    }
+    for (int i=0;i<n;i++){
+        res_prod_esc = res_prod_esc + producto_escalar[i];
+    }
+    printf ("El resultado total del producto escalar es: %d ", res_prod_esc);
+}
 void prod_vectorial(int* vector1, int* vector2, int n){}
