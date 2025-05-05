@@ -1,14 +1,42 @@
 #include <stdio.h>
 
+void submatriz(float origen[10][10], float destino[10][10], int N, int fila, int columna);
+float determinante(float matriz[10][10], int N);
+
+int main() {
+    float matriz[10][10];
+    int N;
+
+    printf("Ingrese el tamaño de la matriz cuadrada: ");
+    scanf("%d", &N);
+	while(N < 1 || N > 10){
+		printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
+		scanf("%d", &N);
+	}
+
+    printf("Ingrese los elementos de la matriz:\n");
+    for(int i=0; i < N; i++){
+			for(int j=0; j < N; j++){
+				printf("\t\tA[%d][%d]: > ", i, j);
+				scanf("%f", &matriz[i][j]);
+			}
+		}
+
+    float resultado = determinante(matriz, N);
+    printf("El determinante es: %.2f\n", resultado);
+
+    return 0;
+}
+
 // Genera la submatriz menor al eliminar la fila 'fila' y la columna 'col'
 void submatriz(float origen[10][10], float destino[10][10], int N, int fila, int columna) {
-    int i, j, Ni = 0, Nj;
+    int i, j, Ni=0, Nj=0;
 
-    for (i=0; i < N; i++) {
-        if (i != fila) {
+    for(i=0; i < N; i++){
+        if(i != fila){
             Nj = 0;
-            for (j=0; j < N; j++) {
-                if (j != columna) {
+            for(j=0; j < N; j++){
+                if(j != columna){
                     destino[Ni][Nj] = origen[i][j];
                     Nj++;
                 }
@@ -37,27 +65,3 @@ float determinante(float matriz[10][10], int N) {
     return det;
 }
 
-int main() {
-    float matriz[10][10];
-    int N;
-
-    printf("Ingrese el tamaño de la matriz cuadrada: ");
-    scanf("%d", &N);
-	while(N < 1 || N > 10){
-		printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
-		scanf("%d", &N);
-	}
-
-    printf("Ingrese los elementos de la matriz:\n");
-    for(int i=0; i < N; i++){
-			for(int j=0; j < N; j++){
-				printf("\t\tA[%d][%d]: > ", i, j);
-				scanf("%f", &matriz[i][j]);
-			}
-		}
-
-    float resultado = determinante(matriz, N);
-    printf("El determinante es: %.2f\n", resultado);
-
-    return 0;
-}
