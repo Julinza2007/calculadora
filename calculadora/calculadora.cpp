@@ -28,7 +28,7 @@ void matrizResta(int F, int C, float A[10][10], float B[10][10]);
 void matrizPorEscalar(int F, int C, float A[10][10], float escalar);
 void matrizPorMatriz(int F, int F1, int C, int C1, float A[10][10], float B[10][10]);
 void matrizDeterminante(int N, float matriz[10][10]);
-
+void matrizInversa(int N, float matriz[10][10]);
 
 
 int main(){
@@ -278,7 +278,7 @@ void menuOpciones3(int opc){
 	int tamanio, filas, filas1, columnas, columnas1;
 	float matrizA[10][10], matrizB[10][10];
 	float escalar;
-	
+	int n;
 	switch(opc){
 		
 		case 0:
@@ -333,6 +333,9 @@ void menuOpciones3(int opc){
 			
 		break;
 		case 5:
+			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, matrizA, matrizB, opc);
+			tamanio = filas;
+			matrizInversa(tamanio, matrizA);
 		break;
 		case 6:
 		break;
@@ -386,7 +389,7 @@ void ingresarMatriz(int *F, int *F1, int *C, int *C1, float matrizA[10][10], flo
 			}
 		}
 	}
-	else if(opc == 4){
+	else if(opc == 4 || opc == 5){
 		printf("\n\nIngrese los valores de la matriz cuadrada:\n");
 		for(i=0; i < *F; i++){
 			for(j=0; j < *F; j++){
@@ -459,7 +462,7 @@ void ingresarFilasColumnas(int *F, int *F1, int *C, int *C1, int opc){
 			
 	}
 	
-	else if(opc == 4){
+	else if(opc == 4  || opc == 5){
 		
 			printf("\n\nIngrese el tamanio la matriz: ");
 			scanf("%d", F);
@@ -564,6 +567,50 @@ void matrizDeterminante(int N, float matriz[10][10]){
 	
 	
 	
+}
+
+void matrizInversa(int N, float matriz[10][10]){
+    int i, j, k;
+    // Crea la matriz identidad, necesaria para calcular la inversa.
+    float identidad[10][10];
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+            if (i == j) {
+                identidad[i][j] = 1.0;
+            } else {
+                identidad[i][j] = 0.0;
+            }
+        }
+    }
+    // Hago el pivote igual a 1, asi es mas facil trabajar
+    for (i = 0; i < N; i++) {
+        float pivote = matriz[i][i];
+        // Dividir toda la fila por el pivote
+        for (j = 0; j < N; j++) {
+            matriz[i][j] = matriz[i][j] / pivote;
+            identidad[i][j] = identidad[i][j] / pivote;
+        }
+
+        // Eliminar los elementos debajo y encima del pivote
+        for (k = 0; k < N; k++) {
+            if (k != i) {
+                float factor = matriz[k][i];
+                for (j = 0; j < N; j++) {
+                    matriz[k][j] = matriz[k][j] - factor * matriz[i][j]; 
+                    identidad[k][j] = identidad[k][j] - factor * identidad[i][j];
+                }
+            }
+        }
+    }
+
+    // Imprimir la matriz inversa
+    printf("La matriz inversa es: \n");
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+            printf("%f ", identidad[i][j]);
+        }
+        printf("\n");
+    }
 }
 
 
