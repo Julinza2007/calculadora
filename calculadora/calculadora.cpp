@@ -22,13 +22,12 @@ void menuOpciones3(int opc);
 void ingresarFilasColumnas(int *F, int *F1, int *C, int *C1, int opc);
 void ingresarMatriz(int *F, int *F1, int *C, int *C1, float matrizA[10][10], float matrizB[10][10], int opc);
 
-
-
 //Operaciones
 void matrizSuma(int F, int C, float A[10][10], float B[10][10]);
 void matrizResta(int F, int C, float A[10][10], float B[10][10]);
 void matrizPorEscalar(int F, int C, float A[10][10], float escalar);
 void matrizPorMatriz(int F, int F1, int C, int C1, float A[10][10], float B[10][10]);
+void matrizDeterminante(int N, float matriz[10][10]);
 
 
 
@@ -206,37 +205,48 @@ void suma(float num, float num1){
 	
 	printf("\n\nSuma: \n");
 	float resultado = num + num1;
-	printf("\n%f + %f es igual a %f", num, num1, resultado);
+	printf("\n%f + %f es igual a %2.f", num, num1, resultado);
 }
 
 void resta(float num, float num1){
 	printf("\n\nResta: \n");
 	float resultado = num - num1;
-	printf("\n%f - %f es igual a %f", num, num1, resultado);
+	printf("\n%f - %f es igual a %2.f", num, num1, resultado);
 }
 
 void multiplicacion(float num, float num1){
 	printf("\n\nMultiplicacion: \n");
 	float resultado = num * num1;
-	printf("\n%f x %f es igual a %f", num, num1, resultado);
+	printf("\n%f x %f es igual a %2.f", num, num1, resultado);
 }
 
 void division(float num, float num1){
 	printf("\n\nDivision: \n");
 	float resultado = num / num1;
-	printf("\n%f / %f es igual a %f", num, num1, resultado);
+	if(num1 != 0){
+		printf("\n%f / %f es igual a %2.f", num, num1, resultado);
+	}
+	else{
+		printf("\nError matematico.");
+	}
+	
 }
 
 void potencia(float base, float exponente){
 	printf("\n\nPotencia: \n");
 	float resultado = pow(base, exponente);
-	printf("\n%f elevado a %f es igual a %f", base, exponente, resultado);
+	printf("\n%f elevado a %f es igual a %2.f", base, exponente, resultado);
 }
 
 void raiz(float radical, float indice){
 	printf("\n\nRaiz: \n");
-	float resultado = pow(radical, (1 / indice));
-	printf("\nLa raiz %f de %f es igual a: %f", radical, indice, resultado);
+	float resultado = pow(radical, (1.0 / indice));
+	if(indice != 0){
+		printf("\nLa raiz %f de %f es igual a: %2.f", radical, indice, resultado);
+	}
+	else{
+		printf("\nError matematico.");
+	}
 }
 
 int ingresarOpciones3(){
@@ -265,7 +275,7 @@ int ingresarOpciones3(){
 
 void menuOpciones3(int opc){
 	char opcLetra;
-	int filas, filas1, columnas, columnas1;
+	int tamanio, filas, filas1, columnas, columnas1;
 	float matrizA[10][10], matrizB[10][10];
 	float escalar;
 	
@@ -317,6 +327,10 @@ void menuOpciones3(int opc){
 		break;
 		
 		case 4:
+			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, matrizA, matrizB, opc);
+			tamanio = filas;
+			matrizDeterminante(tamanio, matrizA);
+			
 		break;
 		case 5:
 		break;
@@ -367,6 +381,15 @@ void ingresarMatriz(int *F, int *F1, int *C, int *C1, float matrizA[10][10], flo
 		printf("\n\nIngrese los valores de la matriz:\n");
 		for(i=0; i < *F; i++){
 			for(j=0; j < *C; j++){
+				printf("\t\tA[%d][%d]: > ", i, j);
+				scanf("%f", &matrizA[i][j]);
+			}
+		}
+	}
+	else if(opc == 4){
+		printf("\n\nIngrese los valores de la matriz cuadrada:\n");
+		for(i=0; i < *F; i++){
+			for(j=0; j < *F; j++){
 				printf("\t\tA[%d][%d]: > ", i, j);
 				scanf("%f", &matrizA[i][j]);
 			}
@@ -436,7 +459,16 @@ void ingresarFilasColumnas(int *F, int *F1, int *C, int *C1, int opc){
 			
 	}
 	
+	else if(opc == 4){
+		
+			printf("\n\nIngrese el tamanio la matriz: ");
+			scanf("%d", F);
+			while(*F < 1 || *F > 10){
+				printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
+				scanf("%d", F);
+			}
 	
+	}
 	
 }
 
@@ -483,7 +515,6 @@ void matrizResta(int F, int C, float A[10][10], float B[10][10]){
 	
 }
 
-// Para multiplicar una matriz por un escalar es tan sencillo como que el usuario ingrese una sola matriz y luego a esa la multiplique por un escalar.
 void matrizPorEscalar(int F, int C, float A[10][10], float escalar){
 	int i, j;
 	float resultado[10][10];
@@ -527,6 +558,14 @@ void matrizPorMatriz(int FA, int FB, int CA, int CB, float A[10][10], float B[10
 	
 }
 
+void matrizDeterminante(int N, float matriz[10][10]){
+	matriz[N][N];
+	
+	
+	
+	
+}
+
 
 
 /*
@@ -534,6 +573,9 @@ PARTE MÍA
 Multiplicación de matrices → Necesitás 2 matrices compatibles (por ejemplo MxN × NxP).
 
 Determinante de una matriz → Solo 1 matriz cuadrada.
+
+HASTA ACÁ
+
 
 Inversa de una matriz → Solo 1 matriz cuadrada.
 
