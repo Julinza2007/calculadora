@@ -19,16 +19,12 @@ void raiz(float indice, float radicando);
 //Opcion 3
 int ingresarOpciones3();
 void menuOpciones3(int opc);
-void ingresarFilasColumnas(int *F, int *F1, int *C, int *C1, int opc);
-void ingresarMatriz(int *F, int *F1, int *C, int *C1, float matrizA[10][10], float matrizB[10][10], int opc);
-
-
-
+void ingresarFilasColumnas(int *F, int *C, int opc);
+void ingresarMatriz(int *F, int *C, float matrizA[10][10], float matrizB[10][10], int opc);
 //Operaciones
 void matrizSuma(int F, int C, float A[10][10], float B[10][10]);
 void matrizResta(int F, int C, float A[10][10], float B[10][10]);
 void matrizPorEscalar(int F, int C, float A[10][10], float escalar);
-void matrizPorMatriz(int F, int F1, int C, int C1, float A[10][10], float B[10][10]);
 
 
 
@@ -265,7 +261,7 @@ int ingresarOpciones3(){
 
 void menuOpciones3(int opc){
 	char opcLetra;
-	int filas, filas1, columnas, columnas1;
+	int filas, columnas;
 	float matrizA[10][10], matrizB[10][10];
 	float escalar;
 	
@@ -288,7 +284,7 @@ void menuOpciones3(int opc){
 				scanf(" %c", &opcLetra);
 			}
 			
-			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, matrizA, matrizB, opc);
+			ingresarMatriz(&filas, &columnas, matrizA, matrizB, opc);
 			
 			switch(opcLetra){
 				case 'S':
@@ -303,7 +299,7 @@ void menuOpciones3(int opc){
 		break;
 		
 		case 2:
-			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, matrizA, matrizB, opc);
+			ingresarMatriz(&filas, &columnas, matrizA, matrizB, opc);
 			printf("\n\nIngrese el valor de un Escalar para multiplicar a la matriz: ");
 			scanf("%f", &escalar);
 			
@@ -312,8 +308,7 @@ void menuOpciones3(int opc){
 		break;
 		
 		case 3:
-			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, matrizA, matrizB, opc);
-			matrizPorMatriz(filas, filas1, columnas, columnas1, matrizA, matrizB);					
+			ingresarMatriz(&filas, &columnas, matrizA, matrizB, opc);					
 		break;
 		
 		case 4:
@@ -325,10 +320,10 @@ void menuOpciones3(int opc){
 	}
 }
 
-void ingresarMatriz(int *F, int *F1, int *C, int *C1, float matrizA[10][10], float matrizB[10][10], int opc){
+void ingresarMatriz(int *F, int *C, float matrizA[10][10], float matrizB[10][10], int opc){
 	int i, j;
 	
-	ingresarFilasColumnas(F, F1, C, C1, opc);
+	ingresarFilasColumnas(F, C, opc);
 	
 	if(opc == 1 || opc == 3){
 		printf("\n\nIngrese los valores de la matriz A:\n");
@@ -341,27 +336,13 @@ void ingresarMatriz(int *F, int *F1, int *C, int *C1, float matrizA[10][10], flo
 		}
 	
  		printf("\n\nIngrese los valores de la matriz B:\n");
- 		
- 		if(opc == 1){
  	
- 			for(i=0; i < *F; i++){
- 				for(j=0; j < *C; j++){
- 					printf("\t\tB[%d][%d]: > ", i, j);
- 					scanf("%f", &matrizB[i][j]);
-			 	}
-			}
+ 		for(i=0; i < *F; i++){
+ 			for(j=0; j < *C; j++){
+ 				printf("\t\tB[%d][%d]: > ", i, j);
+ 				scanf("%f", &matrizB[i][j]);
+			 }
 		}
-		else if(opc == 3){
-			for(i=0; i < *F1; i++){
-				for(j=0; j < *C1; j++){
-					printf("\t\tB[%d][%d]: > ", i, j);
- 					scanf("%f", &matrizB[i][j]);
-				}
-			}
-		}
-		
-		
-		
 	}
 	else if(opc == 2){
 		printf("\n\nIngrese los valores de la matriz:\n");
@@ -377,7 +358,7 @@ void ingresarMatriz(int *F, int *F1, int *C, int *C1, float matrizA[10][10], flo
 }
 	
 
-void ingresarFilasColumnas(int *F, int *F1, int *C, int *C1, int opc){
+void ingresarFilasColumnas(int *F, int *C, int opc){
 	
 	if(opc == 1 || opc == 2){
 		
@@ -393,47 +374,8 @@ void ingresarFilasColumnas(int *F, int *F1, int *C, int *C1, int opc){
 			while(*C < 1 || *C > 10){
 				printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
 				scanf("%d", C);
-			}				
-	}
-	
-	else if(opc == 3){
-				
-		do{
-    		printf("\n\nIngrese la cantidad de filas de la Primer Matriz: ");
-    		scanf("%d", F);
-    		while(*F < 1 || *F > 10){
-				printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
-				scanf("%d", F);
 			}
-			
-    		printf("\nIngrese la cantidad de columnas de la Primer Matriz: ");
-    		scanf("%d", C);
-    		while(*C < 1 || *C > 10){
-				printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
-				scanf("%d", C);
-			}
-			
-    		printf("\nIngrese la cantidad de filas de la Segunda Matriz: ");
-    		scanf("%d", F1);
-    		while(*F1 < 1 || *F1 > 10){
-				printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
-				scanf("%d", F1);
-			}
-			
-    		printf("\nIngrese la cantidad de columnas de la Segunda Matriz: ");
-    		scanf("%d", C1);
-    		while(*C1 < 1 || *C1 > 10){
-				printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
-				scanf("%d", C1);
-			}
-
-    		if(*C != *F1){
-    	 	   printf("\n\nError: Para multiplicar matrices, la cantidad de columnas de la primera matriz debe ser igual a la cantidad de filas de la segunda.\n");
-    		}
-
-		}while(*C != *F1);
-	
-			
+						
 	}
 	
 	
@@ -504,34 +446,8 @@ void matrizPorEscalar(int F, int C, float A[10][10], float escalar){
 }
 
 
-void matrizPorMatriz(int FA, int FB, int CA, int CB, float A[10][10], float B[10][10]){
-	int i, j, k;
-	float resultado[10][10];
-	
-	for(i=0; i < CA; i++){
-		for(j=0; j < CB; j++){
-			resultado[i][j] = 0;
-			for(k=0; k < CA; k++){
-				resultado[i][j] += A[i][k] * B[k][j];
-			}
-		}
-	}
-	
-	printf("\n\nLa Matriz resultante es igual a: \n\n");
-	for(i=0; i < FA; i++){
-		for(j=0; j < CB; j++){
-			printf("|%.2f|", resultado[i][j]);
-		}
-		printf("\n");
-	}
-	
-}
 
-
-
-/*
-PARTE MÍA
-Multiplicación de matrices → Necesitás 2 matrices compatibles (por ejemplo MxN × NxP).
+/* PARA NACHO
 
 Determinante de una matriz → Solo 1 matriz cuadrada.
 
