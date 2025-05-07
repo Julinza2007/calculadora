@@ -29,7 +29,7 @@ void matrizPorEscalar(int F, int C, float A[10][10], float escalar);
 void matrizPorMatriz(int F, int F1, int C, int C1, float A[10][10], float B[10][10]);
 void matrizDeterminante(int N, float matriz[10][10]);
 void matrizInversa(int N, float matriz[10][10]);
-
+void divisionMatrices(float A[10][10], float B[10][10]);
 
 int main(){
 	int opcionMenu, opcion1, opcion3;
@@ -338,6 +338,11 @@ void menuOpciones3(int opc){
 			matrizInversa(tamanio, matrizA);
 		break;
 		case 6:
+			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, matrizA, matrizB, opc);
+			tamanio = filas1;
+			matrizInversa(tamanio, matrizA);
+			
+//			divisionMatrices(A[10][10], identidad[10][10]);
 		break;
 	}
 }
@@ -347,7 +352,7 @@ void ingresarMatriz(int *F, int *F1, int *C, int *C1, float matrizA[10][10], flo
 	
 	ingresarFilasColumnas(F, F1, C, C1, opc);
 	
-	if(opc == 1 || opc == 3){
+	if(opc == 1 || opc == 3 || opc == 6){
 		printf("\n\nIngrese los valores de la matriz A:\n");
 	
 		for(i=0; i < *F; i++){
@@ -377,6 +382,9 @@ void ingresarMatriz(int *F, int *F1, int *C, int *C1, float matrizA[10][10], flo
 			}
 		}
 		
+		else if(opc == 6){
+			
+		}
 		
 		
 	}
@@ -471,6 +479,18 @@ void ingresarFilasColumnas(int *F, int *F1, int *C, int *C1, int opc){
 				scanf("%d", F);
 			}
 	
+	}
+	else if (opc == 6){
+		printf("Ingrese las filas de la primer matriz: ");
+		scanf("%d", F);
+		printf("Ingrese las columnas de la primer matriz: ");
+		scanf("%d", C);
+		printf("\n\nIngrese el tamanio la segunda matriz: ");
+		scanf("%d", F1);
+		while(*F1 < 1 || *F1 > 10){
+				printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
+				scanf("%d", F1);
+			}
 	}
 	
 }
@@ -602,7 +622,6 @@ void matrizInversa(int N, float matriz[10][10]){
             }
         }
     }
-
     // Imprimir la matriz inversa
     printf("La matriz inversa es: \n");
     for (i = 0; i < N; i++) {
@@ -613,7 +632,9 @@ void matrizInversa(int N, float matriz[10][10]){
     }
 }
 
-
+void divisionMatrices(A[10][10], inv[10][10]){
+	
+}
 
 /*
 PARTE MÍA
