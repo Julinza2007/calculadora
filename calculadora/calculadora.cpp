@@ -1,26 +1,7 @@
-<<<<<<< HEAD
-void prod_vectorial(int* vector1, int* vector2, int n){
-    if (n == 3){
-        int vector_x;
-        int vector_y;
-        int vector_z;
-        vector_x = (vector1[2] * vector2[3]) - (vector1[3] * vector2 [2]); 
-        vector_y = (vector1[1] * vector2[3]) - (vector1[3] * vector2 [1]); 
-        vector_z = (vector1[1] * vector2[2]) - (vector1[2] * vector2 [1]); 
-        
-        printf ("el producto vectorial da X=%d - Y=%d - Z=%d", vector_x, vector_z, vector_y);
-    }
-    else{
-        printf ("No se puede llevar a cabo el producto vectorial ya que la longitud del vector no es de 3");
-    }
-}
-
-}
-
-=======
 #include <stdio.h>
 #include <math.h>
 #include <ctype.h>
+#include <stdlib.h>
 //Opcion menu
 int ingresarOpcionMenu();
 
@@ -45,6 +26,10 @@ void prod_escalar(int* vector1, int* vector2, int n);
 void prod_vectorial(int* vector1, int* vector2, int n);
 
 
+//opcion 4
+void obtenerCoeficientes();
+int resolverSistema2x2(float a1, float b1, float c1, float a2, float b2, float c2, float *x, float *y);
+int resolverSistema3x3(float a1, float b1, float c1, float d1, float a2, float b2, float c2, float d2, float a3, float b3, float c3, float d3, float *x, float *y, float *z);
 int main(){
 	int opcionMenu, opcion1;
 	
@@ -73,7 +58,7 @@ int main(){
 			break;
 			
 			case 4:
-				printf("\n\nHola mundo.\n\n");
+			    obtenerCoeficientes();
 			break;
 			
 			case 0:
@@ -259,8 +244,8 @@ void vector (){
          int n;
          printf ("\n\nIngrese la longitud del vector: ");
          scanf ("%d", &n);
-         int* vector1 = new int[n];
-         int* vector2 = new int[n];
+         int vector1 [n];
+         int vector2 [n];
          
          printf("\n\n");
          for (int i=0;i<n;i++){
@@ -370,10 +355,169 @@ void prod_escalar(int* vector1, int* vector2, int n){
     for (int i=0;i<n;i++){
         producto_escalar[i]= vector1[i] * vector2[i];
     }
-    for (int i=0;i<n;i++){
+    for (int i=0;i<n;i++){ 
         res_prod_esc = res_prod_esc + producto_escalar[i];
     }
     printf ("El resultado total del producto escalar es: %d ", res_prod_esc);
 }
-void prod_vectorial(int* vector1, int* vector2, int n){}
->>>>>>> 617d0ea23a5618eecb525ff8ea5734172472d2b5
+void prod_vectorial(int* vector1, int* vector2, int n){
+    if (n == 3){
+        int vector_x;
+        int vector_y;
+        int vector_z;
+        vector_x = (vector1[1] * vector2[2]) - (vector1[2] * vector2 [1]); 
+        vector_y = (vector1[0] * vector2[2]) - (vector1[2] * vector2 [0]); 
+        vector_z = (vector1[0] * vector2[1]) - (vector1[1] * vector2 [0]); 
+        
+        printf ("el producto vectorial da X=%d - Y=%d - Z=%d", vector_x, vector_y, vector_z);
+    }
+    else{
+        printf ("No se puede llevar a cabo el producto vectorial ya que la longitud del vector no es de 3");
+    }
+}
+
+// opcion 4
+
+void obtenerCoeficientes() {
+	
+	int opcion;
+	
+	printf("Ingrese 1 para resolver un sistema 2x2 \n");
+	printf("Ingrese 2 para resolver un sistema 3x3 \n");
+	scanf("%d", &opcion);
+	
+	while(opcion != 1 && opcion != 2){
+		printf("Opcion invalida. Ingrese 1 para 2x2 o 2 para 3x3 \n");
+		scanf("%d", &opcion);
+	}
+	
+	
+	 if (opcion == 1) {
+        float a1, b1, c1, a2, b2, c2; // coeficientes
+        float x, y; // soluciones
+
+        printf("\nIngrese los coeficientes para la primera ecuacion x, y, su resultado: \n");
+        while (scanf("%f %f %f", &a1, &b1, &c1) != 3) {  
+            printf("Entrada invalida. Intente de nuevo: \n");
+            while (getchar() != '\n');
+        }
+
+        printf("Ingrese los coeficientes para la segunda ecuacion x, y, su resultado: \n");
+        while (scanf("%f %f %f", &a2, &b2, &c2) != 3) {  
+            printf("Entrada invalida. Intente de nuevo: \n");
+            while (getchar() != '\n');
+        }
+
+        int resultado = resolverSistema2x2(a1, b1, c1, a2, b2, c2, &x, &y);
+        if (resultado == 0) {
+            printf("\nResultado:\n");
+            printf("X = %f\n", x);
+            printf("Y = %f\n", y);
+        } else {
+            printf("\nNo se puede resolver el sistema.\n");
+        }
+    } 
+    else if (opcion == 2) {
+    
+        float a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3;
+        float x, y, z;
+        
+        
+        
+        
+        printf("Ingrese los coeficientes de la primera ecuacion");
+         while (scanf("%f %f %f %f", &a2, &b2, &c2, &d2) != 4) {
+            while (getchar() != '\n'); 
+        printf("Entrada inválida. Intenta de nuevo:\n");
+}
+        
+        
+        printf("Ingrese los coeficientes de la segunda ecuacion");
+       while (scanf("%f %f %f %f", &a2, &b2, &c2, &d2) != 4) {
+        while (getchar() != '\n');
+         printf("Entrada inválida. Intenta de nuevo:\n");
+    }
+        
+        printf("Ingrese los coeficientes de la tercera ecuacion");
+       while (scanf("%f %f %f %f", &a2, &b2, &c2, &d2) != 4) {
+         while (getchar() != '\n'); 
+        printf("Entrada inválida. Intenta de nuevo:\n");
+}
+        int resultado = resolverSistema3x3(a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, &x, &y, &z);
+        
+        printf("X: %f \n", x);
+        printf("Y: %f \n", y);
+        printf("Z: %f \n", z);
+        
+        
+    }            
+
+int resolverSistema2x2(float a1, float b1, float c1, float a2, float b2, float c2, float *x, float *y){
+    
+    if(a1 == 0){
+        printf("No se puede resolver porque a1 es 0 \n");
+        return 1;
+    }
+    
+    
+    float A = (-a2 * b1 / a1) +b2;
+    float B = c2 - (a2 *c1 / a1);
+    
+    
+    
+    if (A == 0){
+        printf("No se puede resolver el sistema por que se esta dividiendo por 0 \n");
+        return 1;
+    }
+    
+    *y = B / A;
+    *x = (c1-b1 * (*y)) / a1;
+    
+    return 0;
+}
+
+int resolverSistema3x3(float a1, float b1, float c1, float d1, float a2, float b2, float c2, float d2, float a3, float b3, float c3, float d3, float *x, float *y, float *z){
+    int i;
+    float matriz[3][4] = {
+        {a1, b1, c1, d1},
+        {a2, b2, c2, d2},
+        {a3, b3, c3, d3}
+    };
+    
+    
+    for(int i = 0 ; i< 3; i++){
+        if(matriz[i][i] == 0){
+            printf("No se puede resolver por que tiene 0");
+            return 1;
+        }
+    }
+    
+    
+    float pivote = matriz[i][i];
+    for(int j = 0 ; j < 3; j++){
+        matriz[i][j] /= pivote;
+    }
+    
+    
+    for(int k = 0; k < 3; k++){
+        if(k != i){
+            float factor = matriz[k][i];
+            for(int j = 0; j<4 ; j++){
+                matriz[k][i] -= factor * matriz[i][j];
+            }
+        }
+    }
+    
+    
+     *x = matriz[0][3];
+    *y = matriz[1][3];
+    *z = matriz[2][3];
+
+    return 0;
+
+    
+    
+    
+} 
+}
+	
