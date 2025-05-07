@@ -27,8 +27,8 @@ void matrizSuma(int F, int C, float A[10][10], float B[10][10]);
 void matrizResta(int F, int C, float A[10][10], float B[10][10]);
 void matrizPorEscalar(int F, int C, float A[10][10], float escalar);
 void matrizPorMatriz(int F, int F1, int C, int C1, float A[10][10], float B[10][10]);
-void matrizDeterminante(int N, float matriz[10][10]);
-
+float matrizDeterminante(int N, float matriz[10][10]);
+void submatriz(float origen[10][10], float destino[10][10], int N, int fila, int columna);
 
 
 int main(){
@@ -278,6 +278,7 @@ void menuOpciones3(int opc){
 	int tamanio, filas, filas1, columnas, columnas1;
 	float matrizA[10][10], matrizB[10][10];
 	float escalar;
+	float resultado;
 	
 	switch(opc){
 		
@@ -329,7 +330,10 @@ void menuOpciones3(int opc){
 		case 4:
 			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, matrizA, matrizB, opc);
 			tamanio = filas;
-			matrizDeterminante(tamanio, matrizA);
+			
+			resultado = matrizDeterminante(tamanio, matrizA);			
+			printf("\n\nEl determinante es: %.2f\n", resultado);
+
 			
 		break;
 		case 5:
@@ -558,13 +562,51 @@ void matrizPorMatriz(int FA, int FB, int CA, int CB, float A[10][10], float B[10
 	
 }
 
-void matrizDeterminante(int N, float matriz[10][10]){
+float matrizDeterminante(int N, float matriz[10][10]){
+	float resultado, menor[10][10], det=0, signo=1;
+	int i, j;
+	
 	matriz[N][N];
+
+    if(N == 1){
+        resultado = matriz[0][0];
+	}
+
+    else if(N == 2){
+       resultado = matriz[0][0] * matriz[1][1] - matriz[0][1] * matriz[1][0];
+	}
+
+    else if(N >= 3){
+		for(int j=0; j < N; j++) {
+        	submatriz(matriz, menor, N, 0, j);
+        	resultado += signo * matriz[0][j] * matrizDeterminante(N - 1, menor);
+        	signo *= -1;
+    	}
+	}
 	
+	return resultado;
 	
-	
-	
+		
 }
+
+void submatriz(float origen[10][10], float destino[10][10], int N, int fila, int columna){
+    int i, j, Ni=0, Nj=0;
+
+    for(i=0; i < N; i++){
+        if(i != fila){
+            Nj = 0;
+            for(j=0; j < N; j++){
+                if(j != columna){
+                    destino[Ni][Nj] = origen[i][j];
+                    Nj++;
+                }
+            }
+            Ni++;
+        }
+    }
+}
+
+
 
 
 
