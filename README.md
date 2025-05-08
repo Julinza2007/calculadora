@@ -4,6 +4,9 @@
 -  ### Laje Eluney.
 -  ### Linzalata Julián.
 ---
+# *Diagramas*
+- ### Calculadora: https://drive.google.com/file/d/1Zp8ZvP0QRHcplMsPgcJEAXRoxgTLdwYR/view?usp=sharing
+
 # 📘 Instructivo completo para colaborar en el repositorio privado
 
 🔗 Repositorio: [https://github.com/Julinza2007/calculadora](https://github.com/Julinza2007/calculadora)
