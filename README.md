@@ -7,6 +7,7 @@
 # *Diagramas 🎨*
 - ## Calculadora: https://drive.google.com/file/d/1Zp8ZvP0QRHcplMsPgcJEAXRoxgTLdwYR/view?usp=sharing
      - ### opcion 1: https://drive.google.com/file/d/1b7-uwg4IqxpME_0oute-a-kDhogUvIFf/view?usp=sharing
+            -#### Suma : https://drive.google.com/file/d/1iW8XDXlpZ0cxQ9kCr9p6ewuZmADa-zjf/view?usp=sharing
 
 # 📘 Instructivo completo para colaborar en el repositorio privado
 
