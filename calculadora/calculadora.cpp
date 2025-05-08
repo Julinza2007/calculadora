@@ -426,7 +426,7 @@ void obtenerCoeficientes() {
         
         
         printf("Ingrese los coeficientes de la primera ecuacion");
-         while (scanf("%f %f %f %f", &a2, &b2, &c2, &d2) != 4) {
+         while (scanf("%f %f %f %f", &a1, &b1, &c1, &d1) != 4) {
             while (getchar() != '\n'); 
         printf("Entrada inválida. Intenta de nuevo:\n");
 }
@@ -439,7 +439,7 @@ void obtenerCoeficientes() {
     }
         
         printf("Ingrese los coeficientes de la tercera ecuacion");
-       while (scanf("%f %f %f %f", &a2, &b2, &c2, &d2) != 4) {
+       while (scanf("%f %f %f %f", &a3, &b3, &c3, &d3) != 4) {
          while (getchar() != '\n'); 
         printf("Entrada inválida. Intenta de nuevo:\n");
 }
@@ -450,7 +450,8 @@ void obtenerCoeficientes() {
         printf("Z: %f \n", z);
         
         
-    }            
+    }
+}
 
 int resolverSistema2x2(float a1, float b1, float c1, float a2, float b2, float c2, float *x, float *y){
     
@@ -509,9 +510,10 @@ int resolverSistema3x3(float a1, float b1, float c1, float d1, float a2, float b
     }
     
     
-     *x = matriz[0][3];
+    *x = matriz[0][3];
     *y = matriz[1][3];
     *z = matriz[2][3];
+    
 
     return 0;
 
@@ -519,5 +521,3 @@ int resolverSistema3x3(float a1, float b1, float c1, float d1, float a2, float b
     
     
 } 
-}
-	
