@@ -195,7 +195,7 @@ void suma(float num, float num1){
 void resta(float num, float num1){
 	printf("\n\nResta: \n");
 	float resultado = num - num1;
-	printf("\n%.2f - %2.f es igual a %.2f", num, num1, resultado);
+	printf("\n%.2f - %.2f es igual a %.2f", num, num1, resultado);
 }
 
 void multiplicacion(float num, float num1){
