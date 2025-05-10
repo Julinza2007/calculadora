@@ -6,9 +6,9 @@ int ingresarOpcionMenu();
 
 //Opcion 1.
 int ingresarOpciones1();
-void menuOpciones1(int *opc);
+void menuOpciones1(int opc);
 //Operaciones
-void ingresarNumeros(float *num, float *num1, int *opc, char *letra);
+void ingresarNumeros(float *num, float *num1, int opc, char *letra);
 void suma(float num, float num1);
 void resta(float num, float num1);
 void multiplicacion(float num, float num1);
@@ -32,8 +32,7 @@ int main(){
 		switch(opcionMenu){
 			case 1:
 				opcion1 = ingresarOpciones1();
-				menuOpciones1(&opcion1);
-				
+				menuOpciones1(opcion1);			
 				
 			break;
 			
@@ -54,8 +53,7 @@ int main(){
 			break;
 		}
 	
-	}
-	while(opcionMenu != 0);
+	}while(opcionMenu != 0);
 	
 
 return 0;
@@ -93,9 +91,9 @@ int ingresarOpciones1(){
 	return opcMenu1;
 }
 
-void menuOpciones1(int *opc){
+void menuOpciones1(int opc){
 	char opcLetra;
-	switch(*opc){
+	switch(opc){
 		case 1:
 			printf("\n\n\tIngrese S. Para realizar una Suma.\n");
 			printf("\tIngrese R. Para realizar una Resta.\n");
@@ -164,14 +162,14 @@ void menuOpciones1(int *opc){
 	}
 }
 
-void ingresarNumeros(float *num, float *num1, int *opc, char *letra){
-	if(*opc == 1){
+void ingresarNumeros(float *num, float *num1, int opc, char *letra){
+	if(opc == 1){
 	printf("\n\nIngrese el primer numero: ");
 	scanf("%f", num);
 	printf("Ingrese el segundo numero: ");
 	scanf("%f", num1);
 	}
-	else if(*opc == 2){
+	else if(opc == 2){
 		if(*letra == 'P'){
 			printf("\n\nIngrese la base: ");
 			scanf("%f", num);
@@ -191,35 +189,50 @@ void suma(float num, float num1){
 	
 	printf("\n\nSuma: \n");
 	float resultado = num + num1;
-	printf("\n%f + %f es igual a %f", num, num1, resultado);
+	printf("\n%.2f + %.2f es igual a %.2f", num, num1, resultado);
 }
 
 void resta(float num, float num1){
 	printf("\n\nResta: \n");
 	float resultado = num - num1;
-	printf("\n%f - %f es igual a %f", num, num1, resultado);
+	printf("\n%.2f - %2.f es igual a %.2f", num, num1, resultado);
 }
 
 void multiplicacion(float num, float num1){
 	printf("\n\nMultiplicacion: \n");
 	float resultado = num * num1;
-	printf("\n%f x %f es igual a %f", num, num1, resultado);
+	printf("\n%.2f x %.2f es igual a %.2f", num, num1, resultado);
 }
 
 void division(float num, float num1){
 	printf("\n\nDivision: \n");
 	float resultado = num / num1;
-	printf("\n%f / %f es igual a %f", num, num1, resultado);
+	if(num1 != 0){
+		printf("\n%.2f / %.2f es igual a %.2f", num, num1, resultado);
+	}
+	else{
+		printf("\nError matematico.\n\n");
+	}
 }
 
 void potencia(float base, float exponente){
 	printf("\n\nPotencia: \n");
 	float resultado = pow(base, exponente);
-	printf("\n%f elevado a %f es igual a %f", base, exponente, resultado);
+	printf("\n%2.f elevado a %.2f es igual a %.2f", base, exponente, resultado);
 }
 
 void raiz(float radical, float indice){
+	int indiceEntero = indice;
 	printf("\n\nRaiz: \n");
-	float resultado = pow(radical, (1 / indice));
-	printf("\nLa raiz %f de %f es igual a: %f", radical, indice, resultado);
+	float resultado = pow(radical, (1.0 / indice));
+	
+	if(indice == 0){
+		printf("\nError matematico.");
+	}
+	else if(radical < 0 && (indiceEntero == indice) && (indiceEntero % 2 == 0)){
+			printf("\nError matematico.");
+	}
+	else{
+		printf("\nLa raiz %.2f de %.2f es igual a: %.2f", indice, radical, resultado);
+	}
 }
