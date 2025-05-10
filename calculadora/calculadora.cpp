@@ -6,9 +6,9 @@ int ingresarOpcionMenu();
 
 //Opcion 1.
 int ingresarOpciones1();
-void menuOpciones1(int *opc);
-void ingresarNumeros(float *num, float *num1, int *opc, char *letra);
+void menuOpciones1(int opc);
 //Operaciones
+void ingresarNumeros(float *num, float *num1, int opc, char letra);
 void suma(float num, float num1);
 void resta(float num, float num1);
 void multiplicacion(float num, float num1);
@@ -45,8 +45,7 @@ int main(){
 		switch(opcionMenu){
 			case 1:
 				opcion1 = ingresarOpciones1();
-				menuOpciones1(&opcion1);
-				
+				menuOpciones1(opcion1);			
 				
 			break;
 			
@@ -68,8 +67,7 @@ int main(){
 			break;
 		}
 	
-	}
-	while(opcionMenu != 0);
+	}while(opcionMenu != 0);
 	
 
 return 0;
@@ -107,9 +105,9 @@ int ingresarOpciones1(){
 	return opcMenu1;
 }
 
-void menuOpciones1(int *opc){
+void menuOpciones1(int opc){
 	char opcLetra;
-	switch(*opc){
+	switch(opc){
 		case 1:
 			printf("\n\n\tIngrese S. Para realizar una Suma.\n");
 			printf("\tIngrese R. Para realizar una Resta.\n");
@@ -125,7 +123,7 @@ void menuOpciones1(int *opc){
 			}
 			
 			float num, num1;
-			ingresarNumeros(&num, &num1, opc, &opcLetra);
+			ingresarNumeros(&num, &num1, opc, opcLetra);
 						
 			switch(opcLetra){
 				case 'S':
@@ -164,12 +162,12 @@ void menuOpciones1(int *opc){
 			
 			switch(opcLetra){
 				case 'P':
-					ingresarNumeros(&base, &exponente, opc, &opcLetra);
+					ingresarNumeros(&base, &exponente, opc, opcLetra);
 					potencia(base, exponente);
 				break;
 				
 				case 'R':
-					ingresarNumeros(&radical, &indice, opc, &opcLetra);
+					ingresarNumeros(&radical, &indice, opc, opcLetra);
 					raiz(radical, indice);
 				break;
 			}
@@ -178,21 +176,21 @@ void menuOpciones1(int *opc){
 	}
 }
 
-void ingresarNumeros(float *num, float *num1, int *opc, char *letra){
-	if(*opc == 1){
+void ingresarNumeros(float *num, float *num1, int opc, char letra){
+	if(opc == 1){
 	printf("\n\nIngrese el primer numero: ");
 	scanf("%f", num);
 	printf("Ingrese el segundo numero: ");
 	scanf("%f", num1);
 	}
-	else if(*opc == 2){
-		if(*letra == 'P'){
+	else if(opc == 2){
+		if(letra == 'P'){
 			printf("\n\nIngrese la base: ");
 			scanf("%f", num);
 			printf("Ingrese el exponente: ");
 			scanf("%f", num1);
 		}
-		else if(*letra == 'R'){
+		else if(letra == 'R'){
 			printf("\n\nIngrese el radical: ");
 			scanf("%f", num);
 			printf("Ingrese el indice: ");
@@ -205,48 +203,54 @@ void suma(float num, float num1){
 	
 	printf("\n\nSuma: \n");
 	float resultado = num + num1;
-	printf("\n%f + %f es igual a %2.f", num, num1, resultado);
+	printf("\n%.2f + %.2f es igual a %.2f", num, num1, resultado);
 }
 
 void resta(float num, float num1){
 	printf("\n\nResta: \n");
 	float resultado = num - num1;
-	printf("\n%f - %f es igual a %2.f", num, num1, resultado);
+	printf("\n%.2f - %.2f es igual a %.2f", num, num1, resultado);
 }
 
 void multiplicacion(float num, float num1){
 	printf("\n\nMultiplicacion: \n");
 	float resultado = num * num1;
-	printf("\n%f x %f es igual a %2.f", num, num1, resultado);
+	printf("\n%.2f x %.2f es igual a %.2f", num, num1, resultado);
 }
 
 void division(float num, float num1){
 	printf("\n\nDivision: \n");
 	float resultado = num / num1;
 	if(num1 != 0){
-		printf("\n%f / %f es igual a %2.f", num, num1, resultado);
+		printf("\n%.2f / %.2f es igual a %.2f", num, num1, resultado);
 	}
 	else{
-		printf("\nError matematico.");
+		printf("\nError matematico.\n\n");
 	}
-	
 }
 
 void potencia(float base, float exponente){
 	printf("\n\nPotencia: \n");
 	float resultado = pow(base, exponente);
-	printf("\n%f elevado a %f es igual a %2.f", base, exponente, resultado);
+	
+	printf("\n%2.f elevado a %.2f es igual a %.2f", base, exponente, resultado);
 }
 
 void raiz(float radical, float indice){
+	int indiceEntero = indice;
 	printf("\n\nRaiz: \n");
 	float resultado = pow(radical, (1.0 / indice));
-	if(indice != 0){
-		printf("\nLa raiz %f de %f es igual a: %2.f", radical, indice, resultado);
-	}
-	else{
+	
+	if(indice == 0){
 		printf("\nError matematico.");
 	}
+	else if(radical < 0 && (indiceEntero == indice) && (indiceEntero % 2 == 0)){
+			printf("\nError matematico.");
+	}
+	else{
+		printf("\nLa raiz %.2f de %.2f es igual a: %.2f", indice, radical, resultado);
+	}
+	
 }
 
 int ingresarOpciones3(){
@@ -486,7 +490,6 @@ void matrizSuma(int F, int C, float A[10][10], float B[10][10]){
 		}
 	}
 	
-//	printf("\n---------------------------------------"); ACORDATE AGREGAR ESTO JULIAN A TODOS LOS RESULTADOS PARA QUE QUEDE EL PROGRAMA MAS LEGIBLE DESDE LA CONSOLA.
 	printf("\n\nLa Matriz Resultante de la Suma entre esas dos matrices es igual a:\n\n");
 	
 	for(i=0; i < F; i++){
@@ -495,7 +498,6 @@ void matrizSuma(int F, int C, float A[10][10], float B[10][10]){
 		}
 		printf("\n");
 	}
-//	printf("\n---------------------------------------");
 }
 
 void matrizResta(int F, int C, float A[10][10], float B[10][10]){
@@ -605,22 +607,3 @@ void submatriz(float origen[10][10], float destino[10][10], int N, int fila, int
         }
     }
 }
-
-
-
-
-
-/*
-PARTE MÍA
-Multiplicación de matrices → Necesitás 2 matrices compatibles (por ejemplo MxN × NxP).
-
-Determinante de una matriz → Solo 1 matriz cuadrada.
-
-HASTA ACÁ
-
-
-Inversa de una matriz → Solo 1 matriz cuadrada.
-
-División de matrices → Interpretada como A × (inversa de B) → Requiere 2 matrices, donde la segunda debe ser cuadrada e invertible.
-
-*/
