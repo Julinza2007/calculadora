@@ -79,14 +79,14 @@ int ingresarOpcionMenu(){
 }
 
 int ingresarOpciones1(){
-	int opcMenu1;
+	int opc;
 	printf("\n\n\tIngrese 1. Si quiere realizar operaciones como Suma, Resta, Multiplicacion o Division.");
 	printf("\n\n\tIngrese 2. Si quiere realizar operaciones como Potencias o Raices.");
 	printf("\n\n\n\tIngrese una opcion a elegir: > ");
-	scanf("%d", &opcMenu1);
-	while(opcMenu1 != 1 && opcMenu1 != 2){
+	scanf("%d", &opc);
+	while(opc != 1 && opc != 2){
 		printf("\n\tOpcion no valida.\n\n\tPor favor ingrese de nuevo la opcion correspondiente: > ");
-		scanf("%d", &opcMenu1);
+		scanf("%d", &opc);
 	}
 	return opcMenu1;
 }
