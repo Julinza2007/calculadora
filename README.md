@@ -5,9 +5,27 @@
 -  ### Linzalata Julián.
 ---
 # *Diagramas 🎨*
-- ## Calculadora: https://drive.google.com/file/d/1Zp8ZvP0QRHcplMsPgcJEAXRoxgTLdwYR/view?usp=sharing
-     - ### opcion 1: https://drive.google.com/file/d/1b7-uwg4IqxpME_0oute-a-kDhogUvIFf/view?usp=sharing
-            -#### Suma : https://drive.google.com/file/d/1iW8XDXlpZ0cxQ9kCr9p6ewuZmADa-zjf/view?usp=sharing
+# [📁Repositorio de Google Drive📁](https://drive.google.com/drive/folders/1x_et-w2z8UaHlmtC59hXApNz8V6lKHDK?usp=sharing)
+
+- # Main: https://drive.google.com/file/d/1Zp8ZvP0QRHcplMsPgcJEAXRoxgTLdwYR/view?usp=sharing
+- ## IngresarOpcionMenu: https://drive.google.com/file/d/1Zp8ZvP0QRHcplMsPgcJEAXRoxgTLdwYR/view?usp=sharing
+  ---
+ ## Opcion 1:
+ - ### IngresarOpciones1: https://drive.google.com/file/d/1b7-uwg4IqxpME_0oute-a-kDhogUvIFf/view?usp=sharing
+ - ### MenuOpciones1: https://drive.google.com/drive/u/1/folders/1yJZ2D5CfT_AULeSpkOGtzR7Vk1QhyF1T 
+ - #### Suma: https://drive.google.com/file/d/1iW8XDXlpZ0cxQ9kCr9p6ewuZmADa-zjf/view?usp=sharing
+ - #### Resta: https://drive.google.com/drive/u/1/folders/1gJlULuwuxO_7FyX-yyjL8_6tsd0_qQTN
+ - #### Multiplicacion: https://drive.google.com/drive/u/1/folders/1gJlULuwuxO_7FyX-yyjL8_6tsd0_qQTN
+ - #### Division: https://drive.google.com/drive/u/1/folders/1gJlULuwuxO_7FyX-yyjL8_6tsd0_qQTN
+ 
+
+
+
+
+
+
+
+
 
 # 📘 Instructivo completo para colaborar en el repositorio privado
 
