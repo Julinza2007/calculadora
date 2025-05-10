@@ -8,7 +8,7 @@ int ingresarOpcionMenu();
 int ingresarOpciones1();
 void menuOpciones1(int opc);
 //Operaciones
-void ingresarNumeros(float *num, float *num1, int opc, char *letra);
+void ingresarNumeros(float *num, float *num1, int opc, char letra);
 void suma(float num, float num1);
 void resta(float num, float num1);
 void multiplicacion(float num, float num1);
@@ -109,7 +109,7 @@ void menuOpciones1(int opc){
 			}
 			
 			float num, num1;
-			ingresarNumeros(&num, &num1, opc, &opcLetra);
+			ingresarNumeros(&num, &num1, opc, opcLetra);
 						
 			switch(opcLetra){
 				case 'S':
@@ -148,12 +148,12 @@ void menuOpciones1(int opc){
 			
 			switch(opcLetra){
 				case 'P':
-					ingresarNumeros(&base, &exponente, opc, &opcLetra);
+					ingresarNumeros(&base, &exponente, opc, opcLetra);
 					potencia(base, exponente);
 				break;
 				
 				case 'R':
-					ingresarNumeros(&radical, &indice, opc, &opcLetra);
+					ingresarNumeros(&radical, &indice, opc, opcLetra);
 					raiz(radical, indice);
 				break;
 			}
@@ -162,7 +162,7 @@ void menuOpciones1(int opc){
 	}
 }
 
-void ingresarNumeros(float *num, float *num1, int opc, char *letra){
+void ingresarNumeros(float *num, float *num1, int opc, char letra){
 	if(opc == 1){
 	printf("\n\nIngrese el primer numero: ");
 	scanf("%f", num);
@@ -170,13 +170,13 @@ void ingresarNumeros(float *num, float *num1, int opc, char *letra){
 	scanf("%f", num1);
 	}
 	else if(opc == 2){
-		if(*letra == 'P'){
+		if(letra == 'P'){
 			printf("\n\nIngrese la base: ");
 			scanf("%f", num);
 			printf("Ingrese el exponente: ");
 			scanf("%f", num1);
 		}
-		else if(*letra == 'R'){
+		else if(letra == 'R'){
 			printf("\n\nIngrese el radical: ");
 			scanf("%f", num);
 			printf("Ingrese el indice: ");
