@@ -38,6 +38,7 @@
 
 
 
+---
 # 📘 Instructivo completo para colaborar en el repositorio privado
 
 🔗 Repositorio: [https://github.com/Julinza2007/calculadora](https://github.com/Julinza2007/calculadora)
