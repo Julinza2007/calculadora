@@ -17,7 +17,18 @@
  - #### Resta: https://drive.google.com/drive/u/1/folders/1gJlULuwuxO_7FyX-yyjL8_6tsd0_qQTN
  - #### Multiplicacion: https://drive.google.com/drive/u/1/folders/1gJlULuwuxO_7FyX-yyjL8_6tsd0_qQTN
  - #### Division: https://drive.google.com/drive/u/1/folders/1gJlULuwuxO_7FyX-yyjL8_6tsd0_qQTN
- 
+
+
+
+
+
+
+
+
+
+
+  ## Opcion 2:
+  - ### opciones vector: https://drive.google.com/file/d/1L3f9FfcUR-Mzt6fXMKBzAuge9xl0dCNj/view?usp=sharing
 
 
 
