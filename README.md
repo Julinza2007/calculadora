@@ -31,11 +31,11 @@
 
   ## Opcion 2:
   - ### opciones vector: https://drive.google.com/file/d/1L3f9FfcUR-Mzt6fXMKBzAuge9xl0dCNj/view?usp=sharing
-  - #### Sumar vectores: https://drive.google.com/file/d/1nB0p1yfRbyCLMsmRx8XqQG2Uc2C09WDH/view?usp=sharing
-  - #### Restar vectores: https://drive.google.com/file/d/15W6INjQS_PG-CwSwB3Qi6RE6UlJRrkJH/view?usp=sharing
-  - #### multiplicación escalar: https://drive.google.com/file/d/1--d1X8a4YhMHM0dY8j6NMF6VvxxzEtOs/view?usp=sharing
-  - #### producto escalar: https://drive.google.com/file/d/1--d1X8a4YhMHM0dY8j6NMF6VvxxzEtOs/view?usp=sharing
-  - #### Restar vectores: https://drive.google.com/file/d/15oTF7c7d0uddEVLR-ce-JXBPooSf3yIJ/view?usp=sharing
+    - #### Sumar vectores: https://drive.google.com/file/d/1nB0p1yfRbyCLMsmRx8XqQG2Uc2C09WDH/view?usp=sharing
+    - #### Restar vectores: https://drive.google.com/file/d/15W6INjQS_PG-CwSwB3Qi6RE6UlJRrkJH/view?usp=sharing
+    - #### multiplicación escalar: https://drive.google.com/file/d/1--d1X8a4YhMHM0dY8j6NMF6VvxxzEtOs/view?usp=sharing
+    - #### producto escalar: https://drive.google.com/file/d/1pvZ96GpWrLtNl9FDmMXsfZi7qNLj9fZR/view?usp=sharing
+    - #### producto vectorial: https://drive.google.com/file/d/15oTF7c7d0uddEVLR-ce-JXBPooSf3yIJ/view?usp=sharing
 
 
 
