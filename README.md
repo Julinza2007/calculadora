@@ -4,7 +4,7 @@
 -  ### Laje Eluney.
 -  ### Linzalata Julián.
 ---
-# *Diagramas 🎨*
+# *Diagramas 🎨🔢*
 # [📁Repositorio de Google Drive📁](https://drive.google.com/drive/folders/1x_et-w2z8UaHlmtC59hXApNz8V6lKHDK?usp=sharing)
 
 - # Main: https://drive.google.com/file/d/1Zp8ZvP0QRHcplMsPgcJEAXRoxgTLdwYR/view?usp=sharing
