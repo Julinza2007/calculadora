@@ -12,11 +12,13 @@
   ---
  ## Opcion 1:
  - ### IngresarOpciones1: https://drive.google.com/file/d/1b7-uwg4IqxpME_0oute-a-kDhogUvIFf/view?usp=sharing
- - ### MenuOpciones1: https://drive.google.com/drive/u/1/folders/1yJZ2D5CfT_AULeSpkOGtzR7Vk1QhyF1T 
+ - ### MenuOpciones1: https://drive.google.com/file/d/1c4jDVuVJO0FXaLuLpuD5hxtkbqLymywr/view?usp=sharing 
  - #### Suma: https://drive.google.com/file/d/1iW8XDXlpZ0cxQ9kCr9p6ewuZmADa-zjf/view?usp=sharing
- - #### Resta: https://drive.google.com/drive/u/1/folders/1gJlULuwuxO_7FyX-yyjL8_6tsd0_qQTN
- - #### Multiplicacion: https://drive.google.com/drive/u/1/folders/1gJlULuwuxO_7FyX-yyjL8_6tsd0_qQTN
- - #### Division: https://drive.google.com/drive/u/1/folders/1gJlULuwuxO_7FyX-yyjL8_6tsd0_qQTN
+ - #### Resta: https://drive.google.com/file/d/1gM3oK_Uu2lehBj0A_roXMzs3WNWcCED3/view?usp=sharing
+ - #### Multiplicacion: https://drive.google.com/file/d/1eiQP_fQ8TgSmfTmjtbR_JcT_k_xcpuMX/view?usp=sharing
+ - #### Division: https://drive.google.com/file/d/1l2h5RNMGnBmZVQg9VRDNZtbiKSxXHw9d/view?usp=sharing
+ - #### Potencia: https://drive.google.com/file/d/1dwSwLSbNxj2yd4S_vbRDD39GR8NIq9Wj/view?usp=sharing
+ - #### Raiz: https://drive.google.com/file/d/152GX-cGtZpXJZbagUCfJa0ky0lqswLLZ/view?usp=sharing
 
 
 
