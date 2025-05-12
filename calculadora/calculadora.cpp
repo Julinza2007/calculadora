@@ -54,7 +54,8 @@ int main(){
 			break;
 			
 			case 3:
-				printf("\n\nHola mundo.\n\n");
+				opcion3 = ingresarOpciones3();
+				menuOpciones3(opcion3);
 			break;
 			
 			case 4:
@@ -639,16 +640,16 @@ void divisionMatrices(int FA, int FB, int CA, int CB, int N, float A[10][10], fl
 }
 
 /*
-PARTE MÕA
-MultiplicaciÛn de matrices ? Necesit·s 2 matrices compatibles (por ejemplo MxN ◊ NxP).
+PARTE M√çA
+Multiplicaci√≥n de matrices ? Necesit√°s 2 matrices compatibles (por ejemplo MxN √ó NxP).
 
 Determinante de una matriz ? Solo 1 matriz cuadrada.
 
-HASTA AC¡
+HASTA AC√Å
 
 
 Inversa de una matriz ? Solo 1 matriz cuadrada.
 
-DivisiÛn de matrices ? Interpretada como A ◊ (inversa de B) ? Requiere 2 matrices, donde la segunda debe ser cuadrada e invertible.
+Divisi√≥n de matrices ? Interpretada como A √ó (inversa de B) ? Requiere 2 matrices, donde la segunda debe ser cuadrada e invertible.
 
 */
