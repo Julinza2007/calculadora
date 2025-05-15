@@ -263,12 +263,12 @@ void vector (){
          
          printf("\n\n");
          for (int i=0;i<n;i++){
-             printf ("Ingrese del vector 1 en la posicion %d: ", i);
+             printf ("Ingrese del vector 1 en la posicion %d: ", i+1);
              scanf ("%d", &vector1[i]);
          }
          printf("\n \n");
          for (int i=0;i<n;i++){
-             printf ("Ingrese del vector 2 en la posicion %d: ", i);
+             printf ("Ingrese del vector 2 en la posicion %d: ", i+1);
              scanf ("%d", &vector2[i]);
          }
          
@@ -325,7 +325,7 @@ void suma_vect(int* vector1, int* vector2, int n){
         posi_suma [i] = vector1[i] + vector2[i];
     }
     for (int i=0;i<n;i++){
-        printf ("\nLa suma de la posicion %d es: %d", i, posi_suma[i]);
+        printf ("\nLa suma de la posicion %d es: %d", i+1, posi_suma[i]);
         total_suma = total_suma + posi_suma[i];
     }
     printf ("\n\nEl resultado total de la suma de todas las posiciones es de: %d", total_suma);
@@ -337,7 +337,7 @@ void resta_vect(int* vector1, int* vector2, int n){
         posi_resta [i] = vector1[i] - vector2[i];
     }
     for (int i=0;i<n;i++){
-        printf ("\nLa suma de la posicion %d es: %d", i, posi_resta[i]);
+        printf ("\nLa suma de la posicion %d es: %d", i+1, posi_resta[i]);
         if (i != n - 1)
         total_resta = total_resta + (posi_resta[i] - posi_resta[i+ 1]);
     }
@@ -356,11 +356,11 @@ void multi_esc_vect(int* vector1, int* vector2, int n){
         resultado_escalar2[i] = vector2[i] * escalar;
     }
     for (int i=0;i<n;i++){
-        printf ("La multiplicacion escalar del vector 1 en la posicion %d es igual a %d \t ", i, resultado_escalar1[i]);
+        printf ("La multiplicacion escalar del vector 1 en la posicion %d es igual a %d \t ", i+1, resultado_escalar1[i]);
     }
     printf ("\n");
     for (int i=0;i<n;i++){
-        printf ("La multiplicacion escalar del vector 2 en la posicion %d es igual a %d \t ", i, resultado_escalar2[i]);
+        printf ("La multiplicacion escalar del vector 2 en la posicion %d es igual a %d \t ", i+1, resultado_escalar2[i]);
     }
 }
 void prod_escalar(int* vector1, int* vector2, int n){
@@ -444,20 +444,20 @@ void obtenerCoeficientes() {
         printf("Ingrese los coeficientes de la primera ecuacion");
          while (scanf("%f %f %f %f", &a1, &b1, &c1, &d1) != 4) {
             while (getchar() != '\n'); 
-        printf("Entrada invÃ¡lida. Intenta de nuevo:\n");
+        printf("Entrada inválida. Intenta de nuevo:\n");
 }
         
         
         printf("Ingrese los coeficientes de la segunda ecuacion");
        while (scanf("%f %f %f %f", &a2, &b2, &c2, &d2) != 4) {
         while (getchar() != '\n');
-         printf("Entrada invÃ¡lida. Intenta de nuevo:\n");
+         printf("Entrada inválida. Intenta de nuevo:\n");
     }
         
         printf("Ingrese los coeficientes de la tercera ecuacion");
        while (scanf("%f %f %f %f", &a3, &b3, &c3, &d3) != 4) {
          while (getchar() != '\n'); 
-        printf("Entrada invÃ¡lida. Intenta de nuevo:\n");
+        printf("Entrada inválida. Intenta de nuevo:\n");
 }
         int resultado = resolverSistema3x3(a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, &x, &y, &z);
         
@@ -493,47 +493,39 @@ int resolverSistema2x2(float a1, float b1, float c1, float a2, float b2, float c
     return 0;
 }
 
-int resolverSistema3x3(float a1, float b1, float c1, float d1, float a2, float b2, float c2, float d2, float a3, float b3, float c3, float d3, float *x, float *y, float *z){
-    int i;
+int resolverSistema3x3(float a1, float b1, float c1, float d1,
+                       float a2, float b2, float c2, float d2,
+                       float a3, float b3, float c3, float d3,
+                       float *x, float *y, float *z) {
     float matriz[3][4] = {
         {a1, b1, c1, d1},
         {a2, b2, c2, d2},
         {a3, b3, c3, d3}
     };
-    
-    
-    for(int i = 0 ; i< 3; i++){
-        if(matriz[i][i] == 0){
-            printf("No se puede resolver por que tiene 0");
+
+    for (int i = 0; i < 3; i++) {
+        if (matriz[i][i] == 0) {
+            printf("No se puede resolver: pivote cero.\n");
             return 1;
         }
-    }
-    
-    
-    float pivote = matriz[i][i];
-    for(int j = 0 ; j < 3; j++){
-        matriz[i][j] /= pivote;
-    }
-    
-    
-    for(int k = 0; k < 3; k++){
-        if(k != i){
-            float factor = matriz[k][i];
-            for(int j = 0; j<4 ; j++){
-                matriz[k][i] -= factor * matriz[i][j];
+
+        float pivote = matriz[i][i];
+        for (int j = 0; j < 4; j++)
+            matriz[i][j] /= pivote;
+
+        for (int k = 0; k < 3; k++) {
+            if (k != i) {
+                float factor = matriz[k][i];
+                for (int j = 0; j < 4; j++) {
+                    matriz[k][j] -= factor * matriz[i][j];
+                }
             }
         }
     }
-    
-    
+
     *x = matriz[0][3];
     *y = matriz[1][3];
     *z = matriz[2][3];
-    
 
     return 0;
-
-    
-    
-    
 }
