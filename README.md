@@ -8,11 +8,14 @@
 # [📁Repositorio de Google Drive📁](https://drive.google.com/drive/folders/1x_et-w2z8UaHlmtC59hXApNz8V6lKHDK?usp=sharing)
 
 - # Main: https://drive.google.com/file/d/1Zp8ZvP0QRHcplMsPgcJEAXRoxgTLdwYR/view?usp=sharing
-- ## IngresarOpcionMenu: https://drive.google.com/file/d/1Zp8ZvP0QRHcplMsPgcJEAXRoxgTLdwYR/view?usp=sharing
+- ## IngresarOpcionMenu: https://drive.google.com/file/d/1liUrJ0GAXjPov4yWIx3bIMr9aYWfHaUW/view?usp=sharing
   ---
  ## Opcion 1:
  - ### IngresarOpciones1: https://drive.google.com/file/d/1b7-uwg4IqxpME_0oute-a-kDhogUvIFf/view?usp=sharing
- - ### MenuOpciones1: https://drive.google.com/file/d/1c4jDVuVJO0FXaLuLpuD5hxtkbqLymywr/view?usp=sharing 
+ - ### MenuOpciones1: https://drive.google.com/file/d/1c4jDVuVJO0FXaLuLpuD5hxtkbqLymywr/view?usp=sharing
+  ---
+ - ### IngresarNumeros: https://drive.google.com/file/d/14hDGDWVBgLkjSVXTUPiPI1igXSmbv5zy/view?usp=sharing
+  ---
  - #### Suma: https://drive.google.com/file/d/1iW8XDXlpZ0cxQ9kCr9p6ewuZmADa-zjf/view?usp=sharing
  - #### Resta: https://drive.google.com/file/d/1gM3oK_Uu2lehBj0A_roXMzs3WNWcCED3/view?usp=sharing
  - #### Multiplicacion: https://drive.google.com/file/d/1eiQP_fQ8TgSmfTmjtbR_JcT_k_xcpuMX/view?usp=sharing
@@ -36,12 +39,27 @@
     - #### multiplicación escalar: https://drive.google.com/file/d/1--d1X8a4YhMHM0dY8j6NMF6VvxxzEtOs/view?usp=sharing
     - #### producto escalar: https://drive.google.com/file/d/1pvZ96GpWrLtNl9FDmMXsfZi7qNLj9fZR/view?usp=sharing
     - #### producto vectorial: https://drive.google.com/file/d/15oTF7c7d0uddEVLR-ce-JXBPooSf3yIJ/view?usp=sharing
+
+
+  ## Opcion 3:
+  - ### IngresarOpciones3: https://drive.google.com/file/d/1Xdyzx22UKOo0NX35PeSgnBa_SVVaVMig/view?usp=sharing
+  - ### MenuOpciones3: https://drive.google.com/file/d/15PRCbWd2C5nowl7FYoIfGorX_SjXiN8q/view?usp=sharing
+    --
+  - ### IngresarFilasColumnas:  
+  - ### IngresarMatriz: 
+    --
+    - #### Suma de matrices: 
+    - #### Resta de matrices: 
+    - #### Multiplicacion entre matrices:
+    - #### Multiplicacion por un escalar:
+    - #### Determinante de una matriz:
+    - #### Inversa:
+    - #### Division:
    
+    
 
 
-
-
-
+---
 ## Opcion 4:
   -### Sistema 2x2 y 3x3: https://drive.google.com/file/d/1zcdfgF3OvLgnlMsU92TvR_Y53UsnGqJz/view?usp=sharing
 
