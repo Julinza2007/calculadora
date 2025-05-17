@@ -19,17 +19,18 @@ void raiz(float indice, float radicando);
 //Opcion 3
 int ingresarOpciones3();
 void menuOpciones3(int opc);
-void ingresarFilasColumnas(int *F, int *F1, int *C, int *C1, int opc);
-void ingresarMatriz(int *F, int *F1, int *C, int *C1, float matrizA[10][10], float matrizB[10][10], int opc);
+void ingresarFilasColumnas(int *F, int *F1, int *C, int *C1, int *N, int opc);
+void ingresarMatriz(int *F, int *F1, int *C, int *C1, int *N, float matrizA[10][10], float matrizB[10][10], int opc);
 
 //Operaciones
 void matrizSuma(int F, int C, float A[10][10], float B[10][10]);
 void matrizResta(int F, int C, float A[10][10], float B[10][10]);
 void matrizPorEscalar(int F, int C, float A[10][10], float escalar);
-void matrizPorMatriz(int F, int F1, int C, int C1, float A[10][10], float B[10][10]);
+void matrizPorMatriz(int F, int F1, int C, int C1, float A[10][10], float B[10][10], int opc);
 float matrizDeterminante(int N, float matriz[10][10]);
 void submatriz(float origen[10][10], float destino[10][10], int N, int fila, int columna);
-
+void matrizInversa(int N, float matriz[10][10], int opc);
+void divisionMatrices(int FA, int CA, int N, float A[10][10], float inv[10][10], int opc);
 
 int main(){
 	int opcionMenu, opcion1, opcion3;
@@ -232,7 +233,6 @@ void division(float num, float num1){
 void potencia(float base, float exponente){
 	printf("\n\nPotencia: \n");
 	float resultado = pow(base, exponente);
-	
 	printf("\n%2.f elevado a %.2f es igual a %.2f", base, exponente, resultado);
 }
 
@@ -250,7 +250,6 @@ void raiz(float radical, float indice){
 	else{
 		printf("\nLa raiz %.2f de %.2f es igual a: %.2f", indice, radical, resultado);
 	}
-	
 }
 
 int ingresarOpciones3(){
@@ -279,11 +278,9 @@ int ingresarOpciones3(){
 
 void menuOpciones3(int opc){
 	char opcLetra;
-	int tamanio, filas, filas1, columnas, columnas1;
+	int filas, filas1, columnas, columnas1, N;
 	float matrizA[10][10], matrizB[10][10];
-	float escalar;
-	float resultado;
-	
+	float escalar, resultado;
 	switch(opc){
 		
 		case 0:
@@ -303,7 +300,7 @@ void menuOpciones3(int opc){
 				scanf(" %c", &opcLetra);
 			}
 			
-			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, matrizA, matrizB, opc);
+			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, &N, matrizA, matrizB, opc);
 			
 			switch(opcLetra){
 				case 'S':
@@ -318,7 +315,7 @@ void menuOpciones3(int opc){
 		break;
 		
 		case 2:
-			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, matrizA, matrizB, opc);
+			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, &N, matrizA, matrizB, opc);
 			printf("\n\nIngrese el valor de un Escalar para multiplicar a la matriz: ");
 			scanf("%f", &escalar);
 			
@@ -327,32 +324,33 @@ void menuOpciones3(int opc){
 		break;
 		
 		case 3:
-			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, matrizA, matrizB, opc);
-			matrizPorMatriz(filas, filas1, columnas, columnas1, matrizA, matrizB);					
+			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, &N, matrizA, matrizB, opc);
+			matrizPorMatriz(filas, filas1, columnas, columnas1, matrizA, matrizB, opc);					
 		break;
 		
 		case 4:
-			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, matrizA, matrizB, opc);
-			tamanio = filas;
-			
-			resultado = matrizDeterminante(tamanio, matrizA);			
+			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, &N, matrizA, matrizB, opc);
+			resultado =	matrizDeterminante(N, matrizA);
 			printf("\n\nEl determinante es: %.2f\n", resultado);
-
-			
 		break;
+		
 		case 5:
+			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, &N, matrizA, matrizB, opc);
+			matrizInversa(N, matrizA, opc);
 		break;
 		case 6:
+			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, &N, matrizA, matrizB, opc);
+			divisionMatrices(filas, columnas, N, matrizA, matrizB, opc);
 		break;
 	}
 }
 
-void ingresarMatriz(int *F, int *F1, int *C, int *C1, float matrizA[10][10], float matrizB[10][10], int opc){
+void ingresarMatriz(int *F, int *F1, int *C, int *C1, int *N, float matrizA[10][10], float matrizB[10][10], int opc){
 	int i, j;
 	
-	ingresarFilasColumnas(F, F1, C, C1, opc);
+	ingresarFilasColumnas(F, F1, C, C1, N, opc);
 	
-	if(opc == 1 || opc == 3){
+	if(opc == 1 || opc == 3 || opc == 6){
 		printf("\n\nIngrese los valores de la matriz A:\n");
 	
 		for(i=0; i < *F; i++){
@@ -362,10 +360,10 @@ void ingresarMatriz(int *F, int *F1, int *C, int *C1, float matrizA[10][10], flo
 			}
 		}
 	
- 		printf("\n\nIngrese los valores de la matriz B:\n");
  		
  		if(opc == 1){
- 	
+ 		printf("\n\nIngrese los valores de la matriz B:\n");
+ 			
  			for(i=0; i < *F; i++){
  				for(j=0; j < *C; j++){
  					printf("\t\tB[%d][%d]: > ", i, j);
@@ -381,7 +379,15 @@ void ingresarMatriz(int *F, int *F1, int *C, int *C1, float matrizA[10][10], flo
 				}
 			}
 		}
-		
+		else if (opc == 6){
+			printf("\n\nIngrese los valores de la matriz B:\n");
+			for(i=0; i < *N; i++){
+				for(j=0; j < *N; j++){
+					printf("\t\tB[%d][%d]: > ", i, j);
+					scanf("%f", &matrizB[i][j]);
+				}
+			}
+		}
 		
 		
 	}
@@ -394,10 +400,10 @@ void ingresarMatriz(int *F, int *F1, int *C, int *C1, float matrizA[10][10], flo
 			}
 		}
 	}
-	else if(opc == 4){
+	else if(opc == 4 || opc == 5){
 		printf("\n\nIngrese los valores de la matriz cuadrada:\n");
-		for(i=0; i < *F; i++){
-			for(j=0; j < *F; j++){
+		for(i=0; i < *N; i++){
+			for(j=0; j < *N; j++){
 				printf("\t\tA[%d][%d]: > ", i, j);
 				scanf("%f", &matrizA[i][j]);
 			}
@@ -408,7 +414,7 @@ void ingresarMatriz(int *F, int *F1, int *C, int *C1, float matrizA[10][10], flo
 }
 	
 
-void ingresarFilasColumnas(int *F, int *F1, int *C, int *C1, int opc){
+void ingresarFilasColumnas(int *F, int *F1, int *C, int *C1, int *N, int opc){
 	
 	if(opc == 1 || opc == 2){
 		
@@ -467,15 +473,44 @@ void ingresarFilasColumnas(int *F, int *F1, int *C, int *C1, int opc){
 			
 	}
 	
-	else if(opc == 4){
+	else if(opc == 4  || opc == 5){
 		
 			printf("\n\nIngrese el tamanio la matriz: ");
+			scanf("%d", N);
+			while(*N < 1 || *N > 10){
+				printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
+				scanf("%d", N);
+			}
+	
+	}
+	else if(opc == 6){
+		do{
+			printf("\n\nIngrese las filas de la primer matriz: ");
 			scanf("%d", F);
 			while(*F < 1 || *F > 10){
 				printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
 				scanf("%d", F);
 			}
-	
+			
+			printf("Ingrese las columnas de la primer matriz: ");
+			scanf("%d", C);
+			while(*C < 1 || *C > 10){
+				printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
+				scanf("%d", C);
+			}
+		
+		
+			printf("\n\nIngrese el tamanio la segunda matriz: ");
+			scanf("%d", N);
+			while(*N < 1 || *N > 10){
+				printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
+				scanf("%d", N);
+			}
+			
+			if(*C != *N){
+    			   printf("\n\nError: Para dividir matrices, la cantidad de columnas de la primera matriz debe ser igual al tamanio de la segunda matriz.\n");
+    		}
+    	}while(*C != *N);	
 	}
 	
 }
@@ -498,6 +533,7 @@ void matrizSuma(int F, int C, float A[10][10], float B[10][10]){
 		}
 		printf("\n");
 	}
+
 }
 
 void matrizResta(int F, int C, float A[10][10], float B[10][10]){
@@ -541,11 +577,11 @@ void matrizPorEscalar(int F, int C, float A[10][10], float escalar){
 }
 
 
-void matrizPorMatriz(int FA, int FB, int CA, int CB, float A[10][10], float B[10][10]){
+void matrizPorMatriz(int FA, int FB, int CA, int CB, float A[10][10], float B[10][10], int opc){
 	int i, j, k;
 	float resultado[10][10];
 	
-	for(i=0; i < CA; i++){
+	for(i=0; i < FA; i++){
 		for(j=0; j < CB; j++){
 			resultado[i][j] = 0;
 			for(k=0; k < CA; k++){
@@ -554,13 +590,27 @@ void matrizPorMatriz(int FA, int FB, int CA, int CB, float A[10][10], float B[10
 		}
 	}
 	
-	printf("\n\nLa Matriz resultante es igual a: \n\n");
-	for(i=0; i < FA; i++){
-		for(j=0; j < CB; j++){
-			printf("|%.2f|", resultado[i][j]);
+	if(opc != 6){
+		printf("\n\nLa Matriz resultante de la multiplicacion es igual a: \n\n");
+		for(i=0; i < FA; i++){
+			for(j=0; j < CB; j++){
+				printf("|%.2f|", resultado[i][j]);
+			}
+			printf("\n");
 		}
-		printf("\n");
 	}
+	
+	else{
+		printf("\n\nLa Matriz resultante de la division de matrices es igual a: \n\n");
+		for(i=0; i < FA; i++){
+			for(j=0; j < CB; j++){
+				printf("|%.5f|", resultado[i][j]);
+			}
+			printf("\n");
+	}
+}
+	
+	
 	
 }
 
@@ -605,5 +655,63 @@ void submatriz(float origen[10][10], float destino[10][10], int N, int fila, int
             }
             Ni++;
         }
+	}
+
+}
+
+void matrizInversa(int N, float matriz[10][10], int opc){
+    int i, j, k;
+    float identidad[10][10];
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+            if (i == j) {
+                identidad[i][j] = 1.0;
+            } else {
+                identidad[i][j] = 0.0;
+            }
+        }
     }
+    for (i = 0; i < N; i++) {
+        float pivote = matriz[i][i];
+        for (j = 0; j < N; j++) {
+            matriz[i][j] = matriz[i][j] / pivote;
+            identidad[i][j] = identidad[i][j] / pivote;
+        }
+
+        for (k = 0; k < N; k++) {
+            if (k != i) {
+                float factor = matriz[k][i];
+                for (j = 0; j < N; j++) {
+                    matriz[k][j] = matriz[k][j] - factor * matriz[i][j]; 
+                    identidad[k][j] = identidad[k][j] - factor * identidad[i][j];
+                }
+            }
+        }
+    }
+    
+    	for(i = 0; i < N; i++) {
+        	for (j = 0; j < N; j++) {
+            	matriz[i][j] = identidad[i][j];
+        	}
+    	}
+    
+    
+    if(opc != 6){
+		printf("La matriz inversa es: \n");
+    	for (i = 0; i < N; i++) {
+        	for (j = 0; j < N; j++) {
+            	printf("%f ", identidad[i][j]);
+        	}
+        	printf("\n");
+    	}
+	}
+}
+
+void divisionMatrices(int FA, int CA, int N, float A[10][10], float inv[10][10], int opc){
+	int i, j;
+	
+	matrizInversa(N, inv, opc);
+	
+	matrizPorMatriz(FA, N, CA, N, A, inv, opc);
+	
 }
