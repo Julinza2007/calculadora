@@ -29,7 +29,7 @@ void matrizPorEscalar(int F, int C, float A[10][10], float escalar);
 void matrizPorMatriz(int F, int F1, int C, int C1, float A[10][10], float B[10][10], int opc);
 void matrizDeterminante(int N, float matriz[10][10]);
 void matrizInversa(int N, float matriz[10][10], int opc);
-void divisionMatrices(int FA, int FB, int CA, int CB, int N, float A[10][10], float inv[10][10], int opc);
+void divisionMatrices(int FA, int CA, int N, float A[10][10], float inv[10][10], int opc);
 
 int main(){
 	int opcionMenu, opcion1, opcion3;
@@ -324,7 +324,7 @@ void menuOpciones3(int opc){
 		
 		case 3:
 			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, &N, matrizA, matrizB, opc);
-			matrizPorMatriz(filas, filas1, columnas, columnas1, matrizA, matrizB);					
+			matrizPorMatriz(filas, filas1, columnas, columnas1, matrizA, matrizB, opc);					
 		break;
 		
 		case 4:
@@ -334,11 +334,11 @@ void menuOpciones3(int opc){
 		break;
 		case 5:
 			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, &N, matrizA, matrizB, opc);
-			matrizInversa(N, matrizA);
+			matrizInversa(N, matrizA, opc);
 		break;
 		case 6:
 			ingresarMatriz(&filas, &filas1, &columnas, &columnas1, &N, matrizA, matrizB, opc);
-			divisionMatrices(filas, filas1, columnas, columnas1, N, matrizA, matrizB, opc);
+			divisionMatrices(filas, columnas, N, matrizA, matrizB, opc);
 		break;
 	}
 }
@@ -481,28 +481,34 @@ void ingresarFilasColumnas(int *F, int *F1, int *C, int *C1, int *N, int opc){
 			}
 	
 	}
-	else if (opc == 6){
-		printf("Ingrese las filas de la primer matriz: ");
-		scanf("%d", F);
-		while(*F < 1 || *F > 10){
+	else if(opc == 6){
+		do{
+			printf("\n\nIngrese las filas de la primer matriz: ");
+			scanf("%d", F);
+			while(*F < 1 || *F > 10){
 				printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
 				scanf("%d", F);
 			}
 			
-		printf("Ingrese las columnas de la primer matriz: ");
-		scanf("%d", C);
-		while(*C < 1 || *C > 10){
+			printf("Ingrese las columnas de la primer matriz: ");
+			scanf("%d", C);
+			while(*C < 1 || *C > 10){
 				printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
 				scanf("%d", C);
 			}
 		
 		
-		printf("\n\nIngrese el tamanio la segunda matriz: ");
-		scanf("%d", N);
-		while(*N < 1 || *N > 10){
+			printf("\n\nIngrese el tamanio la segunda matriz: ");
+			scanf("%d", N);
+			while(*N < 1 || *N > 10){
 				printf("Cantidad no valida, considere entre los valores del 1 al 10: ");
 				scanf("%d", N);
 			}
+			
+			if(*C != *N){
+    			   printf("\n\nError: Para dividir matrices, la cantidad de columnas de la primera matriz debe ser igual al tamanio de la segunda matriz.\n");
+    		}
+    	}while(*C != *N);	
 	}
 	
 }
@@ -574,36 +580,48 @@ void matrizPorMatriz(int FA, int FB, int CA, int CB, float A[10][10], float B[10
 	int i, j, k;
 	float resultado[10][10];
 	
-	for(i=0; i < CA; i++){
+	for(i=0; i < FA; i++){
 		for(j=0; j < CB; j++){
 			resultado[i][j] = 0;
 			for(k=0; k < CA; k++){
-				resultado[i][j] = A[i][k] * B[k][j];
+				resultado[i][j] += A[i][k] * B[k][j];
 			}
 		}
 	}
 	
-	printf("\n\nLa Matriz resultante es igual a: \n\n");
-	for(i=0; i < FA; i++){
-		for(j=0; j < CB; j++){
-			printf("|%.2f|", resultado[i][j]);
+	if(opc != 6){
+		printf("\n\nLa Matriz resultante de la multiplicacion es igual a: \n\n");
+		for(i=0; i < FA; i++){
+			for(j=0; j < CB; j++){
+				printf("|%.2f|", resultado[i][j]);
+			}
+			printf("\n");
 		}
-		printf("\n");
 	}
+	
+	else{
+		printf("\n\nLa Matriz resultante de la division de matrices es igual a: \n\n");
+		for(i=0; i < FA; i++){
+			for(j=0; j < CB; j++){
+				printf("|%.5f|", resultado[i][j]);
+			}
+			printf("\n");
+	}
+}
+	
+	
 	
 }
 
 void matrizDeterminante(int N, float matriz[10][10]){
-	matriz[N][N];
 	
 	
 	
 	
 }
 
-void matrizInversa(int N, float matriz[10][10]){
+void matrizInversa(int N, float matriz[10][10], int opc){
     int i, j, k;
-    // Crea la matriz identidad, necesaria para calcular la inversa.
     float identidad[10][10];
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
@@ -614,16 +632,13 @@ void matrizInversa(int N, float matriz[10][10]){
             }
         }
     }
-    // Hago el pivote igual a 1, asi es mas facil trabajar
     for (i = 0; i < N; i++) {
         float pivote = matriz[i][i];
-        // Dividir toda la fila por el pivote
         for (j = 0; j < N; j++) {
             matriz[i][j] = matriz[i][j] / pivote;
             identidad[i][j] = identidad[i][j] / pivote;
         }
 
-        // Eliminar los elementos debajo y encima del pivote
         for (k = 0; k < N; k++) {
             if (k != i) {
                 float factor = matriz[k][i];
@@ -634,53 +649,30 @@ void matrizInversa(int N, float matriz[10][10]){
             }
         }
     }
-    // Imprimir la matriz inversa
-    printf("La matriz inversa es: \n");
-    for (i = 0; i < N; i++) {
-        for (j = 0; j < N; j++) {
-            printf("%f ", identidad[i][j]);
-        }
-        printf("\n");
-    }
+    
+    	for(i = 0; i < N; i++) {
+        	for (j = 0; j < N; j++) {
+            	matriz[i][j] = identidad[i][j];
+        	}
+    	}
+    
+    
+    if(opc != 6){
+		printf("La matriz inversa es: \n");
+    	for (i = 0; i < N; i++) {
+        	for (j = 0; j < N; j++) {
+            	printf("%f ", identidad[i][j]);
+        	}
+        	printf("\n");
+    	}
+	}
 }
 
-void divisionMatrices(int FA, int FB, int CA, int CB, int N, float A[10][10], float inv[10][10], int opc;){
+void divisionMatrices(int FA, int CA, int N, float A[10][10], float inv[10][10], int opc){
 	int i, j;
 	
-	printf("\n\nMatriz A\n");
-	for(i=0; i < N; i++){
-		for(j=0; j < N; j++){
-			printf("|%d|");
-		}
-		printf("\n");
-	}
+	matrizInversa(N, inv, opc);
 	
+	matrizPorMatriz(FA, N, CA, N, A, inv, opc);
 	
-	
-	printf("\n\nMatriz inversa:\n");
-	for(i=0; i < N; i++){
-		for(j=0; j < N; j++){
-			printf("|%f|", inv[i][j]);
-		}
-		printf("\n");
-	}
-	
-
-	matrizInversa(N, inv, opc); // corregir esto y ya estaria
-	matrizPorMatriz(FA, FB, CA, CB, A, inv, opc);
 }
-
-/*
-PARTE MÃA
-MultiplicaciÃ³n de matrices ? NecesitÃ¡s 2 matrices compatibles (por ejemplo MxN Ã— NxP).
-
-Determinante de una matriz ? Solo 1 matriz cuadrada.
-
-HASTA ACÃ
-
-
-Inversa de una matriz ? Solo 1 matriz cuadrada.
-
-DivisiÃ³n de matrices ? Interpretada como A Ã— (inversa de B) ? Requiere 2 matrices, donde la segunda debe ser cuadrada e invertible.
-
-*/
